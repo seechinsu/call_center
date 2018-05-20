@@ -3,7 +3,7 @@ package controllers
 import javax.inject.Inject
 import io.swagger.annotations._
 import models.JsonFormats._
-import models.{Case, CaseRepository, Todo, TodoRepository}
+import models.{Todo, TodoRepository}
 
 import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, ControllerComponents}
@@ -12,9 +12,6 @@ import reactivemongo.bson.BSONObjectID
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-/**
-  * Created by Riccardo Sirigu on 10/08/2017.
-  */
 @Api(value = "/todos")
 class TodoController @Inject()(cc: ControllerComponents, todoRepo: TodoRepository) extends AbstractController(cc) {
 

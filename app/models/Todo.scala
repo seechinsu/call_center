@@ -13,11 +13,9 @@ import reactivemongo.util.LazyLogger
 import reactivemongo.util.LazyLogger.LazyLogger
 
 import java.time.Instant
+import java.time.LocalDate
 import scala.concurrent.{ExecutionContext, Future}
 
-/**
-  * Created by Riccardo Sirigu on 10/08/2017.
-  */
 
 case class Case(_id: Option[BSONObjectID], primaryCaseInfo: PrimaryCaseInfo)
 
@@ -25,6 +23,14 @@ object Case {
   import play.api.libs.json._
 
   implicit val formats: OFormat[Case] = Json.format[Case]
+}
+
+case class Person(_id: Option[BSONObjectID], personInfo: PersonInfo)
+
+object Person {
+  import play.api.libs.json._
+
+  implicit val formats: OFormat[Person] = Json.format[Person]
 }
 
 case class Todo(_id: Option[BSONObjectID], title: String, completed: Option[Boolean])
@@ -132,3 +138,63 @@ class CaseRepository @Inject()(implicit ec: ExecutionContext, reactiveMongoApi: 
   }
 }
 
+case class PersonInfo(
+                            caseId: String,
+                            personType: String,
+                            firstName: String,
+                            middleName: String,
+                            lastName: String,
+                            isCallerReluctant: Boolean,
+                            refused: Boolean,
+                            phoneNumber: String,
+                            birthDate: LocalDate,
+                            Sex: String,
+                            emailAddress: String,
+                            agency: String,
+                            streetAddress: String,
+                            city: String,
+                            zip: String,
+                            county: String,
+                            state: String,
+                            country: String,
+                            notes: String
+                          )
+
+object PersonInfo {
+  import play.api.libs.json._
+
+  implicit val formats: OFormat[PersonInfo] = Json.format[PersonInfo]
+}
+
+class PersonRepository @Inject()(implicit ec: ExecutionContext, reactiveMongoApi: ReactiveMongoApi) {
+
+  import Person._
+  import PersonInfo._
+  import reactivemongo.util.LazyLogger._
+  val logger = LazyLogger.apply(this.getClass.getName)
+
+  def personCollection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection("Person"))
+
+  //val personCollection: Future[JSONCollection] = reactiveMongoApi.database.map{
+  //  case x => x.collection("Person")
+  //}
+
+  def getAll: Future[Seq[Person]] = {
+    val query = Json.obj()
+    personCollection.flatMap{
+      case collection =>
+        val queryCollection = collection.find(query)
+        val queryCursor = queryCollection.cursor[Person](ReadPreference.primary)
+        queryCursor.collect[Seq](5000, Cursor.FailOnError[Seq[Person]]({case x => logger.error(x.toString())}))
+    }
+  }
+
+  def add(person: Person): Future[WriteResult] = {
+    personCollection.flatMap(_.insert(person))
+  }
+
+  def deletePersonInfo(id: BSONObjectID): Future[Option[Person]] = {
+    val selector = BSONDocument("_id" -> id)
+    personCollection.flatMap(_.findAndRemove(selector).map(_.result[Person]))
+  }
+}

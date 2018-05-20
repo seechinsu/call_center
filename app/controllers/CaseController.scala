@@ -3,7 +3,7 @@ package controllers
 import io.swagger.annotations._
 import javax.inject.Inject
 import models.JsonFormats._
-import models.{Case, CaseRepository, Todo, TodoRepository}
+import models.{Case, CaseRepository}
 import reactivemongo.bson.BSONObjectID
 
 import play.api.libs.json.Json
@@ -12,9 +12,6 @@ import play.api.mvc.{AbstractController, ControllerComponents}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-/**
-  * Created by Riccardo Sirigu on 10/08/2017.
-  */
 @Api(value = "/cases")
 class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepository) extends AbstractController(cc) {
 

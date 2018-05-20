@@ -1,0 +1,405 @@
+2018-05-20 01:29:09,817 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-2 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 01:29:10,667 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-2 - Application started (Dev)
+2018-05-20 02:24:17,860 [ERROR] from application in play-dev-mode-akka.actor.default-dispatcher-2 - 
+
+! @782bao908 - Internal server error, for (GET) [/assets/lib/swagger-ui/index.html?url=http%3A%2F%2Flocalhost%3A9000%2Fswagger.json] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[No instance of play.api.libs.json.Format is available for scala.Enumeration, scala.Enumeration, scala.Enumeration in the implicit scope (Hint: if declared in the same file, make sure it's declared before)]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:30)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:30)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:32)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:27)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:27)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:23)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:50)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:50)
+	at scala.util.Either$LeftProjection.map(Either.scala:377)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:50)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$3.apply(PlayRun.scala:72)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$3.apply(PlayRun.scala:72)
+	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:413)
+	at play.runsupport.Reloader$$anon$5.run(Reloader.scala:51)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:47)
+	at play.runsupport.Reloader.reload(Reloader.scala:411)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:123)
+	at play.core.server.Server.getHandlerFor(Server.scala:63)
+	at play.core.server.Server.getHandlerFor$(Server.scala:48)
+	at play.core.server.AkkaHttpServer.getHandlerFor(AkkaHttpServer.scala:41)
+	at play.core.server.AkkaHttpServer.getHandler(AkkaHttpServer.scala:214)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:194)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$3(AkkaHttpServer.scala:106)
+	at akka.stream.impl.fusing.MapAsync$$anon$23.onPush(Ops.scala:1172)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:499)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:462)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:368)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:571)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:457)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:546)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:728)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:743)
+	at akka.actor.Actor.aroundReceive(Actor.scala:517)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:515)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:653)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:527)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:496)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:257)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:224)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:234)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2018-05-20 03:20:28,416 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-14 - ReactiveMongoApi stopping...
+2018-05-20 03:20:28,498 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-191 - ReactiveMongoApi connections are stopped
+2018-05-20 03:20:29,089 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-14 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 03:20:29,485 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-14 - Application started (Dev)
+2018-05-20 03:27:30,030 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-14 - ReactiveMongoApi stopping...
+2018-05-20 03:27:30,050 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-267 - ReactiveMongoApi connections are stopped
+2018-05-20 03:27:30,439 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-14 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 03:27:30,907 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-14 - Application started (Dev)
+2018-05-20 03:34:04,379 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-35 - ReactiveMongoApi stopping...
+2018-05-20 03:34:04,400 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-358 - ReactiveMongoApi connections are stopped
+2018-05-20 03:34:04,781 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-35 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 03:34:05,003 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-35 - Application started (Dev)
+2018-05-20 03:37:32,319 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-35 - ReactiveMongoApi stopping...
+2018-05-20 03:37:32,345 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-432 - ReactiveMongoApi connections are stopped
+2018-05-20 03:37:32,669 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-35 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 03:37:32,878 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-35 - Application started (Dev)
+2018-05-20 03:39:43,851 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-35 - ReactiveMongoApi stopping...
+2018-05-20 03:39:43,871 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-501 - ReactiveMongoApi connections are stopped
+2018-05-20 03:39:44,179 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-35 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 03:39:44,341 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-35 - Application started (Dev)
+2018-05-20 03:46:03,346 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-44 - ReactiveMongoApi stopping...
+2018-05-20 03:46:03,367 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-586 - ReactiveMongoApi connections are stopped
+2018-05-20 03:46:03,640 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-44 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 03:46:03,814 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-44 - Application started (Dev)
+2018-05-20 03:46:09,167 [ERROR] from models.PersonRepository in application-akka.actor.default-dispatcher-3 - (List(),play.api.libs.json.JsResultException: JsResultException(errors:List((/personInfo/personType,List(JsonValidationError(List(error.path.missing),WrappedArray()))))))
+2018-05-20 03:46:09,187 [ERROR] from application in scala-execution-context-global-586 - 
+
+! @782blhk9h - Internal server error, for (GET) [/people] ->
+ 
+play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[JsResultException: JsResultException(errors:List((/personInfo/personType,List(JsonValidationError(List(error.path.missing),WrappedArray())))))]]
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:255)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:182)
+	at play.core.server.AkkaHttpServer$$anonfun$$nestedInanonfun$executeHandler$1$1.applyOrElse(AkkaHttpServer.scala:251)
+	at play.core.server.AkkaHttpServer$$anonfun$$nestedInanonfun$executeHandler$1$1.applyOrElse(AkkaHttpServer.scala:250)
+	at scala.concurrent.Future.$anonfun$recoverWith$1(Future.scala:414)
+	at scala.concurrent.impl.Promise.$anonfun$transformWith$1(Promise.scala:37)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:60)
+	at play.api.libs.streams.Execution$trampoline$.executeScheduled(Execution.scala:109)
+	at play.api.libs.streams.Execution$trampoline$.execute(Execution.scala:71)
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:68)
+	at scala.concurrent.impl.Promise$DefaultPromise.$anonfun$tryComplete$1(Promise.scala:284)
+	at scala.concurrent.impl.Promise$DefaultPromise.$anonfun$tryComplete$1$adapted(Promise.scala:284)
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:284)
+	at scala.concurrent.Promise.complete(Promise.scala:49)
+	at scala.concurrent.Promise.complete$(Promise.scala:48)
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:183)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:29)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:60)
+	at scala.concurrent.impl.ExecutionContextImpl$AdaptedForkJoinTask.exec(ExecutionContextImpl.scala:140)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+Caused by: play.api.libs.json.JsResultException: JsResultException(errors:List((/personInfo/personType,List(JsonValidationError(List(error.path.missing),WrappedArray())))))
+	at reactivemongo.play.json.JSONSerializationPack$.deserialize(JSONSerializationPack.scala:57)
+	at reactivemongo.play.json.JSONSerializationPack$.deserialize(JSONSerializationPack.scala:29)
+	at reactivemongo.core.protocol.ReplyDocumentIterator$.$anonfun$parse$1(protocol.scala:429)
+	at scala.collection.Iterator$$anon$10.next(Iterator.scala:448)
+	at scala.collection.Iterator$ConcatIterator.next(Iterator.scala:218)
+	at reactivemongo.api.DefaultCursor$Impl.$anonfun$foldWhileM$1(cursor.scala:743)
+	at scala.util.Try$.apply(Try.scala:209)
+	at reactivemongo.api.DefaultCursor$Impl.go$1(cursor.scala:743)
+	at reactivemongo.api.DefaultCursor$Impl.$anonfun$foldWhileM$3(cursor.scala:773)
+	at reactivemongo.api.DefaultCursor$Impl.$anonfun$foldBulksM$1(cursor.scala:732)
+	at reactivemongo.api.FoldResponses.handleResponse(cursor.scala:950)
+	at reactivemongo.api.FoldResponses.$anonfun$handle$1(cursor.scala:918)
+	at reactivemongo.api.FoldResponses.$anonfun$handle$1$adapted(cursor.scala:913)
+	at reactivemongo.api.FoldResponses.$anonfun$$bang$1(cursor.scala:1040)
+	at akka.actor.Scheduler$$anon$4.run(Scheduler.scala:140)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2018-05-20 03:47:02,058 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-50 - ReactiveMongoApi stopping...
+2018-05-20 03:47:02,072 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-654 - ReactiveMongoApi connections are stopped
+2018-05-20 03:47:02,357 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-50 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 03:47:02,526 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-50 - Application started (Dev)
+2018-05-20 03:47:23,728 [WARN] from play.filters.CSRF in play-dev-mode-akka.actor.default-dispatcher-50 - [CSRF] Check failed because none/none for request /people/5b0125bc1c5867b7cb70d9a3
+2018-05-20 03:49:32,378 [WARN] from play.filters.CSRF in play-dev-mode-akka.actor.default-dispatcher-50 - [CSRF] Check failed because none/none for request /people/5b0125bc1c5867b7cb70d9a3
+2018-05-20 03:54:38,475 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-64 - ReactiveMongoApi stopping...
+2018-05-20 03:54:38,505 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-739 - ReactiveMongoApi connections are stopped
+2018-05-20 03:54:38,907 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-64 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 03:54:39,095 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-64 - Application started (Dev)
+2018-05-20 03:59:40,872 [WARN] from play.filters.CSRF in play-dev-mode-akka.actor.default-dispatcher-67 - [CSRF] Check failed because none/none for request /people/5b0125bc1c5867b7cb70d9a3
+2018-05-20 04:06:22,610 [ERROR] from application in play-dev-mode-akka.actor.default-dispatcher-70 - 
+
+! @782bo8l9l - Internal server error, for (GET) [/people] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[not found: value x]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:30)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:30)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:32)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:27)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:27)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:23)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:50)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:50)
+	at scala.util.Either$LeftProjection.map(Either.scala:377)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:50)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$3.apply(PlayRun.scala:72)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$3.apply(PlayRun.scala:72)
+	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:413)
+	at play.runsupport.Reloader$$anon$5.run(Reloader.scala:51)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:47)
+	at play.runsupport.Reloader.reload(Reloader.scala:411)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:123)
+	at play.core.server.Server.getHandlerFor(Server.scala:63)
+	at play.core.server.Server.getHandlerFor$(Server.scala:48)
+	at play.core.server.AkkaHttpServer.getHandlerFor(AkkaHttpServer.scala:41)
+	at play.core.server.AkkaHttpServer.getHandler(AkkaHttpServer.scala:214)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:194)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$3(AkkaHttpServer.scala:106)
+	at akka.stream.impl.fusing.MapAsync$$anon$23.onPush(Ops.scala:1172)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:499)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:462)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:368)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:571)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:457)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:546)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:728)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:743)
+	at akka.actor.Actor.aroundReceive(Actor.scala:517)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:515)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:653)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:527)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:496)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:257)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:224)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:234)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2018-05-20 04:06:32,156 [ERROR] from application in play-dev-mode-akka.actor.default-dispatcher-68 - 
+
+! @782bo99cp - Internal server error, for (GET) [/people] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[not found: value x]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:30)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:30)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:32)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:27)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:27)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:23)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:50)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:50)
+	at scala.util.Either$LeftProjection.map(Either.scala:377)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:50)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$3.apply(PlayRun.scala:72)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$3.apply(PlayRun.scala:72)
+	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:413)
+	at play.runsupport.Reloader$$anon$5.run(Reloader.scala:51)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:47)
+	at play.runsupport.Reloader.reload(Reloader.scala:411)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:123)
+	at play.core.server.Server.getHandlerFor(Server.scala:63)
+	at play.core.server.Server.getHandlerFor$(Server.scala:48)
+	at play.core.server.AkkaHttpServer.getHandlerFor(AkkaHttpServer.scala:41)
+	at play.core.server.AkkaHttpServer.getHandler(AkkaHttpServer.scala:214)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:194)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$3(AkkaHttpServer.scala:106)
+	at akka.stream.impl.fusing.MapAsync$$anon$23.onPush(Ops.scala:1172)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:499)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:462)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:368)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:571)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:457)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:546)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:728)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:743)
+	at akka.actor.Actor.aroundReceive(Actor.scala:517)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:515)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:653)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:527)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:496)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:257)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:224)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:234)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2018-05-20 04:07:10,029 [ERROR] from application in play-dev-mode-akka.actor.default-dispatcher-72 - 
+
+! @782bobddf - Internal server error, for (GET) [/people] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[not found: value x]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:30)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:30)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:32)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:27)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:27)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:23)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:50)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:50)
+	at scala.util.Either$LeftProjection.map(Either.scala:377)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:50)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$3.apply(PlayRun.scala:72)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$3.apply(PlayRun.scala:72)
+	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:413)
+	at play.runsupport.Reloader$$anon$5.run(Reloader.scala:51)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:47)
+	at play.runsupport.Reloader.reload(Reloader.scala:411)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:123)
+	at play.core.server.Server.getHandlerFor(Server.scala:63)
+	at play.core.server.Server.getHandlerFor$(Server.scala:48)
+	at play.core.server.AkkaHttpServer.getHandlerFor(AkkaHttpServer.scala:41)
+	at play.core.server.AkkaHttpServer.getHandler(AkkaHttpServer.scala:214)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:194)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$3(AkkaHttpServer.scala:106)
+	at akka.stream.impl.fusing.MapAsync$$anon$23.onPush(Ops.scala:1172)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:499)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:462)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:368)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:571)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:457)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:546)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:728)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:743)
+	at akka.actor.Actor.aroundReceive(Actor.scala:517)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:515)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:653)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:527)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:496)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:257)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:224)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:234)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2018-05-20 04:09:28,130 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-71 - ReactiveMongoApi stopping...
+2018-05-20 04:09:28,193 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-945 - ReactiveMongoApi connections are stopped
+2018-05-20 04:09:28,693 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-71 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 04:09:28,874 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-71 - Application started (Dev)
+2018-05-20 04:10:14,146 [WARN] from play.filters.CSRF in play-dev-mode-akka.actor.default-dispatcher-71 - [CSRF] Check failed because none/none for request /people/5b0125bc1c5867b7cb70d9a3
+2018-05-20 04:12:19,617 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-73 - ReactiveMongoApi stopping...
+2018-05-20 04:12:19,642 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-1016 - ReactiveMongoApi connections are stopped
+2018-05-20 04:12:19,904 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-73 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 04:12:20,070 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-73 - Application started (Dev)
+2018-05-20 04:12:51,581 [WARN] from play.filters.CSRF in play-dev-mode-akka.actor.default-dispatcher-77 - [CSRF] Check failed because none/none for request /people/5b0125bc1c5867b7cb70d9a3
+2018-05-20 04:22:19,370 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-80 - ReactiveMongoApi stopping...
+2018-05-20 04:22:19,391 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-1088 - ReactiveMongoApi connections are stopped
+2018-05-20 04:22:19,707 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-80 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 04:22:19,873 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-80 - Application started (Dev)
+2018-05-20 04:22:39,456 [WARN] from play.filters.CSRF in play-dev-mode-akka.actor.default-dispatcher-82 - [CSRF] Check failed because none/none for request /people/5b0125bc1c5867b7cb70d9a3
+2018-05-20 04:22:42,752 [WARN] from play.filters.CSRF in play-dev-mode-akka.actor.default-dispatcher-81 - [CSRF] Check failed because none/none for request /people/5b0125bc1c5867b7cb70d9a3
+2018-05-20 04:22:43,570 [WARN] from play.filters.CSRF in play-dev-mode-akka.actor.default-dispatcher-83 - [CSRF] Check failed because none/none for request /people/5b0125bc1c5867b7cb70d9a3
+2018-05-20 04:25:35,981 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-79 - ReactiveMongoApi stopping...
+2018-05-20 04:25:36,008 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-1162 - ReactiveMongoApi connections are stopped
+2018-05-20 04:25:36,378 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-79 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 04:25:36,560 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-79 - Application started (Dev)
+2018-05-20 04:26:31,131 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-78 - ReactiveMongoApi stopping...
+2018-05-20 04:26:31,149 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-1161 - ReactiveMongoApi connections are stopped
+2018-05-20 04:26:31,428 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-78 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 04:26:31,580 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-78 - Application started (Dev)
