@@ -33,4 +33,4 @@ To launch them just type ```test``` in a running SBT session or simply type ```s
 
 Enjoy.
 
-Author: [Riccardo Sirigu](https://www.riccardosirigu.com/)
+Author: Tashdid Khan
