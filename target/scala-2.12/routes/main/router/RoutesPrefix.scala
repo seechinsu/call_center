@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/Users/seech/call_center/conf/routes
-// @DATE:Sun May 20 22:20:20 EDT 2018
+// @DATE:Sun May 20 22:58:55 EDT 2018
 
 
 package router {

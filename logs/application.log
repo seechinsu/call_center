@@ -1982,3 +1982,13 @@ play.sbt.PlayExceptions$CompilationException: Compilation error[No QueryString b
     play.filters.headers.SecurityHeadersFilter
 
 2018-05-20 22:20:37,878 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-239 - Application started (Dev)
+2018-05-20 22:59:06,872 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-254 - ReactiveMongoApi stopping...
+2018-05-20 22:59:06,899 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-3403 - ReactiveMongoApi connections are stopped
+2018-05-20 22:59:07,389 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-254 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 22:59:07,757 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-254 - Application started (Dev)
