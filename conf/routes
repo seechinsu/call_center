@@ -7,6 +7,10 @@ GET       /people                     controllers.PersonController.getAllPeople
 GET       /lea                        controllers.LawEnforcementController.getAllLea
 GET       /vehicle                    controllers.VehicleController.getAllVehicles
 GET       /narrative                  controllers.NarrativeController.getAllNarratives
+GET       /address                    controllers.AddressController.getAllAddresses
+
+GET       /cases/:id                  controllers.CaseController.getCase(id: reactivemongo.bson.BSONObjectID)
+GET       /address/:id                 controllers.AddressController.getAddress(id: reactivemongo.bson.BSONObjectID)
 
 + nocsrf
 POST      /cases                      controllers.CaseController.createCase
@@ -18,6 +22,8 @@ POST      /lea                        controllers.LawEnforcementController.creat
 POST      /vehicle                    controllers.VehicleController.createVehicle
 + nocsrf
 POST      /narrative                  controllers.NarrativeController.createNarrative
++ nocsrf
+POST      /address                    controllers.AddressController.createAddress
 
 + nocsrf
 DELETE    /cases/:id                  controllers.CaseController.deleteCase(id: reactivemongo.bson.BSONObjectID)
@@ -29,6 +35,8 @@ DELETE    /lea/:id                    controllers.LawEnforcementController.delet
 DELETE    /vehicle/:id                controllers.VehicleController.deleteVehicle(id: reactivemongo.bson.BSONObjectID)
 + nocsrf
 DELETE    /narrative/:id              controllers.NarrativeController.deleteNarrative(id: reactivemongo.bson.BSONObjectID)
++ nocsrf
+DELETE    /address/:id                controllers.AddressController.deleteAddress(id: reactivemongo.bson.BSONObjectID)
 
 
 # Swagger docs

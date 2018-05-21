@@ -10,10 +10,7 @@ import reactivemongo.bson.{BSONDocument, BSONObjectID}
 import reactivemongo.play.json._
 import reactivemongo.play.json.collection.JSONCollection
 import reactivemongo.util.LazyLogger
-import reactivemongo.util.LazyLogger.LazyLogger
-
 import java.time.Instant
-import java.time.LocalDate
 import scala.concurrent.{ExecutionContext, Future}
 
 
@@ -23,12 +20,6 @@ object Case {
   import play.api.libs.json._
 
   implicit val formats: OFormat[Case] = Json.format[Case]
-}
-
-object PrimaryCaseInfo {
-  import play.api.libs.json._
-
-  implicit val formats: OFormat[PrimaryCaseInfo] = Json.format[PrimaryCaseInfo]
 }
 
 case class PrimaryCaseInfo(
@@ -53,6 +44,11 @@ case class PrimaryCaseInfo(
                             //people: Seq[Person]
 )
 
+object PrimaryCaseInfo {
+  import play.api.libs.json._
+
+  implicit val formats: OFormat[PrimaryCaseInfo] = Json.format[PrimaryCaseInfo]
+}
 
 class CaseRepository @Inject()(implicit ec: ExecutionContext, reactiveMongoApi: ReactiveMongoApi) {
 
@@ -65,7 +61,7 @@ class CaseRepository @Inject()(implicit ec: ExecutionContext, reactiveMongoApi: 
     case x => x.collection("Case")
   }
 
-  def getAll: Future[Seq[Case]] = {
+  def getAllCases: Future[Seq[Case]] = {
     val query = Json.obj()
     caseCollection.flatMap{
       case collection =>
@@ -83,4 +79,15 @@ class CaseRepository @Inject()(implicit ec: ExecutionContext, reactiveMongoApi: 
     val selector = BSONDocument("_id" -> id)
     caseCollection.flatMap(_.findAndRemove(selector).map(_.result[Case]))
   }
+
+  def getCase(id: BSONObjectID): Future[Seq[Case]] = {
+    val selector = BSONDocument("_id" -> id)
+    caseCollection.flatMap{
+      case collection =>
+        val queryCollection = collection.find(selector)
+        val queryCursor = queryCollection.cursor[Case](ReadPreference.primary)
+        queryCursor.collect[Seq](5000, Cursor.FailOnError[Seq[Case]]({case x => logger.error(x.toString())}))
+    }
+  }
+
 }

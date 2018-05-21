@@ -19,8 +19,8 @@ class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepositor
     responseContainer = "List"
   )
   def getAllCases = Action.async {
-    caseRepo.getAll.map { x =>
-      Ok(Json.toJson(x))
+    caseRepo.getAllCases.map { cases =>
+      Ok(Json.toJson(cases))
     }
   }
 
@@ -60,6 +60,16 @@ class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepositor
     caseRepo.deleteCase(caseId).map {
       case Some(caseid) => Ok(Json.toJson(caseid))
       case None => NotFound
+    }
+  }
+
+  @ApiOperation(
+    value = "Find a case",
+    response = classOf[Case]
+  )
+  def getCase(@ApiParam(value = "The id of the case to retrieve") caseId: BSONObjectID) = Action.async{ req =>
+    caseRepo.getAllCases.map { cases =>
+      Ok(Json.toJson(cases))
     }
   }
 }
