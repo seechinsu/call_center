@@ -1178,3 +1178,43 @@ java.lang.ClassNotFoundException: models.Person
     play.filters.headers.SecurityHeadersFilter
 
 2018-05-20 19:58:42,245 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-138 - Application started (Dev)
+2018-05-20 20:07:15,885 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-162 - ReactiveMongoApi stopping...
+2018-05-20 20:07:15,913 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-2110 - ReactiveMongoApi connections are stopped
+2018-05-20 20:07:16,730 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-162 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 20:07:17,112 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-162 - Application started (Dev)
+2018-05-20 20:14:14,840 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-163 - ReactiveMongoApi stopping...
+2018-05-20 20:14:14,864 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-2187 - ReactiveMongoApi connections are stopped
+2018-05-20 20:14:15,295 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-163 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 20:14:15,649 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-163 - Application started (Dev)
+2018-05-20 20:25:16,759 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-177 - ReactiveMongoApi stopping...
+2018-05-20 20:25:16,794 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-2262 - ReactiveMongoApi connections are stopped
+2018-05-20 20:25:17,235 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-177 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 20:25:17,538 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-177 - Application started (Dev)
+2018-05-20 20:37:37,275 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in play-dev-mode-akka.actor.default-dispatcher-180 - ReactiveMongoApi stopping...
+2018-05-20 20:37:37,306 [INFO] from play.modules.reactivemongo.DefaultReactiveMongoApi in scala-execution-context-global-2340 - ReactiveMongoApi connections are stopped
+2018-05-20 20:37:37,736 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-180 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.headers.SecurityHeadersFilter
+
+2018-05-20 20:37:38,056 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-180 - Application started (Dev)

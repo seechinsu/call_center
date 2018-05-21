@@ -48,7 +48,7 @@ class PersonController @Inject()(cc: ControllerComponents, personRepo: PersonRep
   )
   def createPerson() = Action.async(parse.json) { req =>
     req.body.validate[Person].map { personData =>
-      personRepo.add(personData).map { _ =>
+      personRepo.addPerson(personData).map { _ =>
         Created
       }
     }.getOrElse(Future.successful(BadRequest("Invalid Person format")))
@@ -58,8 +58,8 @@ class PersonController @Inject()(cc: ControllerComponents, personRepo: PersonRep
     value = "Delete a Person",
     response = classOf[Person]
   )
-  def deletePersonInfo(@ApiParam(value = "The id of the person to delete") personId: BSONObjectID) = Action.async{ req =>
-    personRepo.deletePersonInfo(personId).map {
+  def deletePerson(@ApiParam(value = "The id of the person to delete") personId: BSONObjectID) = Action.async{ req =>
+    personRepo.deletePerson(personId).map {
       case Some(person) => Ok(Json.toJson(person))
       case None => NotFound
     }

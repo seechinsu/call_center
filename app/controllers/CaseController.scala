@@ -2,9 +2,8 @@ package controllers
 
 import io.swagger.annotations._
 import javax.inject.Inject
-import models.{Case, CaseRepository}
+import models.{Case, CaseRepository, Vehicle}
 import reactivemongo.bson.BSONObjectID
-
 import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, ControllerComponents}
 
@@ -47,9 +46,20 @@ class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepositor
   )
   def createCase() = Action.async(parse.json) { req =>
     req.body.validate[Case].map { caseData =>
-      caseRepo.add(caseData).map { _ =>
+      caseRepo.addCase(caseData).map { _ =>
         Created
       }
     }.getOrElse(Future.successful(BadRequest("Invalid Case format")))
+  }
+
+  @ApiOperation(
+    value = "Delete a case",
+    response = classOf[Case]
+  )
+  def deleteCase(@ApiParam(value = "The id of the case to delete") caseId: BSONObjectID) = Action.async{ req =>
+    caseRepo.deleteCase(caseId).map {
+      case Some(caseid) => Ok(Json.toJson(caseid))
+      case None => NotFound
+    }
   }
 }

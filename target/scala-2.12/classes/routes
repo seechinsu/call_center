@@ -6,6 +6,8 @@ GET       /cases                      controllers.CaseController.getAllCases
 GET       /people                     controllers.PersonController.getAllPeople
 GET       /lea                        controllers.LawEnforcementController.getAllLea
 GET       /vehicle                    controllers.VehicleController.getAllVehicles
+GET       /narrative                  controllers.NarrativeController.getAllNarratives
+
 + nocsrf
 POST      /cases                      controllers.CaseController.createCase
 + nocsrf
@@ -15,11 +17,19 @@ POST      /lea                        controllers.LawEnforcementController.creat
 + nocsrf
 POST      /vehicle                    controllers.VehicleController.createVehicle
 + nocsrf
-DELETE    /people/:id                 controllers.PersonController.deletePersonInfo(id: reactivemongo.bson.BSONObjectID)
+POST      /narrative                  controllers.NarrativeController.createNarrative
+
++ nocsrf
+DELETE    /cases/:id                  controllers.CaseController.deleteCase(id: reactivemongo.bson.BSONObjectID)
++ nocsrf
+DELETE    /people/:id                 controllers.PersonController.deletePerson(id: reactivemongo.bson.BSONObjectID)
 + nocsrf
 DELETE    /lea/:id                    controllers.LawEnforcementController.deleteLawEnforcement(id: reactivemongo.bson.BSONObjectID)
 + nocsrf
 DELETE    /vehicle/:id                controllers.VehicleController.deleteVehicle(id: reactivemongo.bson.BSONObjectID)
++ nocsrf
+DELETE    /narrative/:id              controllers.NarrativeController.deleteNarrative(id: reactivemongo.bson.BSONObjectID)
+
 
 # Swagger docs
 GET       /                           controllers.ApiDocsController.redirectToDocs

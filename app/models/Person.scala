@@ -24,25 +24,19 @@ object Person {
 }
 
 case class PersonInfo(
-                            caseId: String,
+                            personId: String,
                             personType: String,
                             firstName: String,
                             middleName: String,
                             lastName: String,
                             isCallerReluctant: Boolean,
                             refused: Boolean,
-                            phoneNumber: String,
                             birthDate: LocalDate,
-                            Sex: String,
-                            emailAddress: String,
                             agency: String,
-                            streetAddress: String,
-                            city: String,
-                            zip: String,
-                            county: String,
-                            state: String,
-                            country: String,
-                            notes: String
+                            Sex: String,
+                            //contactInfo: ContactInfo,
+                            //addressInfo: Seq[AddressInfo],
+                            //notes: Seq[Narrative]
                           )
 
 object PersonInfo {
@@ -69,11 +63,11 @@ class PersonRepository @Inject()(implicit ec: ExecutionContext, reactiveMongoApi
     }
   }
 
-  def add(person: Person): Future[WriteResult] = {
+  def addPerson(person: Person): Future[WriteResult] = {
     personCollection.flatMap(_.insert(person))
   }
 
-  def deletePersonInfo(id: BSONObjectID): Future[Option[Person]] = {
+  def deletePerson(id: BSONObjectID): Future[Option[Person]] = {
     val selector = BSONDocument("_id" -> id)
     personCollection.flatMap(_.findAndRemove(selector).map(_.result[Person]))
   }

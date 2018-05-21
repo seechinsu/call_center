@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/Users/seech/call_center/conf/routes
-// @DATE:Sun May 20 18:35:44 EDT 2018
+// @DATE:Sun May 20 20:37:29 EDT 2018
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -30,17 +30,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:18
-    def deletePersonInfo: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.PersonController.deletePersonInfo",
-      """
-        function(id0) {
-          return _wA({method:"DELETE", url:"""" + _prefix + { _defaultPrefix } + """" + "people/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].javascriptUnbind + """)("id", id0))})
-        }
-      """
-    )
-  
-    // @LINE:12
+    // @LINE:14
     def createPerson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.PersonController.createPerson",
       """
@@ -50,9 +40,19 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:25
+    def deletePerson: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.PersonController.deletePerson",
+      """
+        function(id0) {
+          return _wA({method:"DELETE", url:"""" + _prefix + { _defaultPrefix } + """" + "people/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
   }
 
-  // @LINE:30
+  // @LINE:40
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -60,7 +60,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:30
+    // @LINE:40
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """
@@ -72,7 +72,47 @@ package controllers.javascript {
   
   }
 
-  // @LINE:26
+  // @LINE:9
+  class ReverseNarrativeController(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:31
+    def deleteNarrative: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.NarrativeController.deleteNarrative",
+      """
+        function(id0) {
+          return _wA({method:"DELETE", url:"""" + _prefix + { _defaultPrefix } + """" + "narrative/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:20
+    def createNarrative: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.NarrativeController.createNarrative",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "narrative"})
+        }
+      """
+    )
+  
+    // @LINE:9
+    def getAllNarratives: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.NarrativeController.getAllNarratives",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "narrative"})
+        }
+      """
+    )
+  
+  }
+
+  // @LINE:36
   class ReverseApiHelpController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -80,7 +120,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:26
+    // @LINE:36
     def getResources: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ApiHelpController.getResources",
       """
@@ -100,7 +140,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:20
+    // @LINE:27
     def deleteLawEnforcement: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.LawEnforcementController.deleteLawEnforcement",
       """
@@ -110,7 +150,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:14
+    // @LINE:16
     def createLawEnforcement: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.LawEnforcementController.createLawEnforcement",
       """
@@ -140,7 +180,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:22
+    // @LINE:29
     def deleteVehicle: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.VehicleController.deleteVehicle",
       """
@@ -150,7 +190,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:16
+    // @LINE:18
     def createVehicle: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.VehicleController.createVehicle",
       """
@@ -180,12 +220,22 @@ package controllers.javascript {
     }
 
   
-    // @LINE:10
+    // @LINE:12
     def createCase: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.CaseController.createCase",
       """
         function() {
           return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "cases"})
+        }
+      """
+    )
+  
+    // @LINE:23
+    def deleteCase: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.CaseController.deleteCase",
+      """
+        function(id0) {
+          return _wA({method:"DELETE", url:"""" + _prefix + { _defaultPrefix } + """" + "cases/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].javascriptUnbind + """)("id", id0))})
         }
       """
     )
@@ -202,7 +252,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:25
+  // @LINE:35
   class ReverseApiDocsController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -210,7 +260,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:25
+    // @LINE:35
     def redirectToDocs: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ApiDocsController.redirectToDocs",
       """

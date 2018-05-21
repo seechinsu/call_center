@@ -32,20 +32,25 @@ object PrimaryCaseInfo {
 }
 
 case class PrimaryCaseInfo(
-  caseType: String,
-  requestType: String,
-  operator: String,
-  aniNumber: String,
-  outOfRange: Boolean,
-  source: String,
-  timeStamp: Long = Instant.now().toEpochMilli,
-  referredBy: String,
-  relatedCases: Int,
-  events: String,
-  amberAlertFlag: Boolean,
-  sourceOrganization: String,
-  referredToAmeco: Boolean,
-  amecoNpo: String
+                            _id: Option[BSONObjectID],
+                            caseType: String,
+                            requestType: String,
+                            operator: String,
+                            dateOfCall: Long = Instant.now().toEpochMilli,
+                            aniNumber: String,
+                            outOfRange: Boolean,
+                            source: String,
+                            referredBy: String,
+                            relatedCases: Int,
+                            events: String,
+                            amberAlertFlag: Boolean,
+                            sourceOrganization: String,
+                            referredToAmeco: Boolean,
+                            amecoNpo: String
+                            //lawEnforcementInfo: Seq[LawEnforcement],
+                            //vehicle: Seq[Vehicle],
+                            //narrative: Seq[Narrative],
+                            //people: Seq[Person]
 )
 
 
@@ -70,7 +75,12 @@ class CaseRepository @Inject()(implicit ec: ExecutionContext, reactiveMongoApi: 
     }
   }
 
-  def add(`case`: Case): Future[WriteResult] = {
+  def addCase(`case`: Case): Future[WriteResult] = {
     caseCollection.flatMap(_.insert(`case`))
+  }
+
+  def deleteCase(id: BSONObjectID): Future[Option[Case]] = {
+    val selector = BSONDocument("_id" -> id)
+    caseCollection.flatMap(_.findAndRemove(selector).map(_.result[Case]))
   }
 }
