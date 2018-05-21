@@ -2,22 +2,24 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET       /todos                      controllers.TodoController.getAllTodos
 GET       /cases                      controllers.CaseController.getAllCases
 GET       /people                     controllers.PersonController.getAllPeople
-GET       /todos/:id                  controllers.TodoController.getTodo(id: reactivemongo.bson.BSONObjectID)
-+ nocsrf
-POST      /todos                      controllers.TodoController.createTodo
+GET       /lea                        controllers.LawEnforcementController.getAllLea
+GET       /vehicle                    controllers.VehicleController.getAllVehicles
 + nocsrf
 POST      /cases                      controllers.CaseController.createCase
 + nocsrf
-POST      /people                      controllers.PersonController.createPerson
+POST      /people                     controllers.PersonController.createPerson
 + nocsrf
-PATCH     /todos/:id                  controllers.TodoController.updateTodo(id: reactivemongo.bson.BSONObjectID)
+POST      /lea                        controllers.LawEnforcementController.createLawEnforcement
 + nocsrf
-DELETE    /todos/:id                  controllers.TodoController.deleteTodo(id: reactivemongo.bson.BSONObjectID)
+POST      /vehicle                    controllers.VehicleController.createVehicle
 + nocsrf
 DELETE    /people/:id                 controllers.PersonController.deletePersonInfo(id: reactivemongo.bson.BSONObjectID)
++ nocsrf
+DELETE    /lea/:id                    controllers.LawEnforcementController.deleteLawEnforcement(id: reactivemongo.bson.BSONObjectID)
++ nocsrf
+DELETE    /vehicle/:id                controllers.VehicleController.deleteVehicle(id: reactivemongo.bson.BSONObjectID)
 
 # Swagger docs
 GET       /                           controllers.ApiDocsController.redirectToDocs

@@ -2,7 +2,6 @@ package controllers
 
 import io.swagger.annotations._
 import javax.inject.Inject
-import models.JsonFormats._
 import models.{Case, CaseRepository}
 import reactivemongo.bson.BSONObjectID
 

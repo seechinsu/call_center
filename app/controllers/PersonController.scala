@@ -2,7 +2,6 @@ package controllers
 
 import javax.inject.Inject
 import io.swagger.annotations._
-import models.JsonFormats._
 import models.{Person, PersonRepository}
 
 import play.api.libs.json.Json
