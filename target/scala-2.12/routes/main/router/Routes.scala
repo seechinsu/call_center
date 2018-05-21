@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/Users/seech/call_center/conf/routes
-// @DATE:Sun May 20 22:20:20 EDT 2018
+// @DATE:Sun May 20 22:58:55 EDT 2018
 
 package router
 
@@ -20,19 +20,21 @@ class Routes(
   // @LINE:6
   PersonController_1: controllers.PersonController,
   // @LINE:7
-  LawEnforcementController_3: controllers.LawEnforcementController,
+  LawEnforcementController_4: controllers.LawEnforcementController,
   // @LINE:8
-  VehicleController_8: controllers.VehicleController,
+  VehicleController_9: controllers.VehicleController,
   // @LINE:9
   NarrativeController_2: controllers.NarrativeController,
   // @LINE:10
-  AddressController_5: controllers.AddressController,
-  // @LINE:43
-  ApiDocsController_4: controllers.ApiDocsController,
-  // @LINE:44
-  ApiHelpController_7: controllers.ApiHelpController,
+  AddressController_6: controllers.AddressController,
+  // @LINE:11
+  ContactInfoController_3: controllers.ContactInfoController,
   // @LINE:48
-  Assets_6: controllers.Assets,
+  ApiDocsController_5: controllers.ApiDocsController,
+  // @LINE:49
+  ApiHelpController_8: controllers.ApiHelpController,
+  // @LINE:53
+  Assets_7: controllers.Assets,
   val prefix: String
 ) extends GeneratedRouter {
 
@@ -43,24 +45,26 @@ class Routes(
     // @LINE:6
     PersonController_1: controllers.PersonController,
     // @LINE:7
-    LawEnforcementController_3: controllers.LawEnforcementController,
+    LawEnforcementController_4: controllers.LawEnforcementController,
     // @LINE:8
-    VehicleController_8: controllers.VehicleController,
+    VehicleController_9: controllers.VehicleController,
     // @LINE:9
     NarrativeController_2: controllers.NarrativeController,
     // @LINE:10
-    AddressController_5: controllers.AddressController,
-    // @LINE:43
-    ApiDocsController_4: controllers.ApiDocsController,
-    // @LINE:44
-    ApiHelpController_7: controllers.ApiHelpController,
+    AddressController_6: controllers.AddressController,
+    // @LINE:11
+    ContactInfoController_3: controllers.ContactInfoController,
     // @LINE:48
-    Assets_6: controllers.Assets
-  ) = this(errorHandler, CaseController_0, PersonController_1, LawEnforcementController_3, VehicleController_8, NarrativeController_2, AddressController_5, ApiDocsController_4, ApiHelpController_7, Assets_6, "/")
+    ApiDocsController_5: controllers.ApiDocsController,
+    // @LINE:49
+    ApiHelpController_8: controllers.ApiHelpController,
+    // @LINE:53
+    Assets_7: controllers.Assets
+  ) = this(errorHandler, CaseController_0, PersonController_1, LawEnforcementController_4, VehicleController_9, NarrativeController_2, AddressController_6, ContactInfoController_3, ApiDocsController_5, ApiHelpController_8, Assets_7, "/")
 
   def withPrefix(prefix: String): Routes = {
     router.RoutesPrefix.setPrefix(prefix)
-    new Routes(errorHandler, CaseController_0, PersonController_1, LawEnforcementController_3, VehicleController_8, NarrativeController_2, AddressController_5, ApiDocsController_4, ApiHelpController_7, Assets_6, prefix)
+    new Routes(errorHandler, CaseController_0, PersonController_1, LawEnforcementController_4, VehicleController_9, NarrativeController_2, AddressController_6, ContactInfoController_3, ApiDocsController_5, ApiHelpController_8, Assets_7, prefix)
   }
 
   private[this] val defaultPrefix: String = {
@@ -74,20 +78,24 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """vehicle""", """controllers.VehicleController.getAllVehicles"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """narrative""", """controllers.NarrativeController.getAllNarratives"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """address""", """controllers.AddressController.getAllAddresses"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """contact""", """controllers.ContactInfoController.getAllContactInfo"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """cases/""" + "$" + """id<[^/]+>""", """controllers.CaseController.getCase(id:reactivemongo.bson.BSONObjectID)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """address/""" + "$" + """id<[^/]+>""", """controllers.AddressController.getAddress(id:reactivemongo.bson.BSONObjectID)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """contact/""" + "$" + """id<[^/]+>""", """controllers.ContactInfoController.getContactInfo(id:reactivemongo.bson.BSONObjectID)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """cases""", """controllers.CaseController.createCase"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """people""", """controllers.PersonController.createPerson"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """lea""", """controllers.LawEnforcementController.createLawEnforcement"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """vehicle""", """controllers.VehicleController.createVehicle"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """narrative""", """controllers.NarrativeController.createNarrative"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """address""", """controllers.AddressController.createAddress"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """contact""", """controllers.ContactInfoController.createContactInfo"""),
     ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """cases/""" + "$" + """id<[^/]+>""", """controllers.CaseController.deleteCase(id:reactivemongo.bson.BSONObjectID)"""),
     ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """people/""" + "$" + """id<[^/]+>""", """controllers.PersonController.deletePerson(id:reactivemongo.bson.BSONObjectID)"""),
     ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """lea/""" + "$" + """id<[^/]+>""", """controllers.LawEnforcementController.deleteLawEnforcement(id:reactivemongo.bson.BSONObjectID)"""),
     ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """vehicle/""" + "$" + """id<[^/]+>""", """controllers.VehicleController.deleteVehicle(id:reactivemongo.bson.BSONObjectID)"""),
     ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """narrative/""" + "$" + """id<[^/]+>""", """controllers.NarrativeController.deleteNarrative(id:reactivemongo.bson.BSONObjectID)"""),
     ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """address/""" + "$" + """id<[^/]+>""", """controllers.AddressController.deleteAddress(id:reactivemongo.bson.BSONObjectID)"""),
+    ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """contact/""" + "$" + """id<[^/]+>""", """controllers.ContactInfoController.deleteContactInfo(id:reactivemongo.bson.BSONObjectID)"""),
     ("""GET""", this.prefix, """controllers.ApiDocsController.redirectToDocs"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """swagger.json""", """controllers.ApiHelpController.getResources"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api-docs""", """controllers.ApiDocsController.redirectToDocs"""),
@@ -140,7 +148,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("lea")))
   )
   private[this] lazy val controllers_LawEnforcementController_getAllLea2_invoker = createInvoker(
-    LawEnforcementController_3.getAllLea,
+    LawEnforcementController_4.getAllLea,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.LawEnforcementController",
@@ -158,7 +166,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("vehicle")))
   )
   private[this] lazy val controllers_VehicleController_getAllVehicles3_invoker = createInvoker(
-    VehicleController_8.getAllVehicles,
+    VehicleController_9.getAllVehicles,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.VehicleController",
@@ -194,7 +202,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("address")))
   )
   private[this] lazy val controllers_AddressController_getAllAddresses5_invoker = createInvoker(
-    AddressController_5.getAllAddresses,
+    AddressController_6.getAllAddresses,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.AddressController",
@@ -207,11 +215,29 @@ class Routes(
     )
   )
 
-  // @LINE:12
-  private[this] lazy val controllers_CaseController_getCase6_route = Route("GET",
+  // @LINE:11
+  private[this] lazy val controllers_ContactInfoController_getAllContactInfo6_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("contact")))
+  )
+  private[this] lazy val controllers_ContactInfoController_getAllContactInfo6_invoker = createInvoker(
+    ContactInfoController_3.getAllContactInfo,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.ContactInfoController",
+      "getAllContactInfo",
+      Nil,
+      "GET",
+      this.prefix + """contact""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:13
+  private[this] lazy val controllers_CaseController_getCase7_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("cases/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_CaseController_getCase6_invoker = createInvoker(
+  private[this] lazy val controllers_CaseController_getCase7_invoker = createInvoker(
     CaseController_0.getCase(fakeValue[reactivemongo.bson.BSONObjectID]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -225,12 +251,12 @@ class Routes(
     )
   )
 
-  // @LINE:13
-  private[this] lazy val controllers_AddressController_getAddress7_route = Route("GET",
+  // @LINE:14
+  private[this] lazy val controllers_AddressController_getAddress8_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("address/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_AddressController_getAddress7_invoker = createInvoker(
-    AddressController_5.getAddress(fakeValue[reactivemongo.bson.BSONObjectID]),
+  private[this] lazy val controllers_AddressController_getAddress8_invoker = createInvoker(
+    AddressController_6.getAddress(fakeValue[reactivemongo.bson.BSONObjectID]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.AddressController",
@@ -243,11 +269,29 @@ class Routes(
     )
   )
 
-  // @LINE:16
-  private[this] lazy val controllers_CaseController_createCase8_route = Route("POST",
+  // @LINE:15
+  private[this] lazy val controllers_ContactInfoController_getContactInfo9_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("contact/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val controllers_ContactInfoController_getContactInfo9_invoker = createInvoker(
+    ContactInfoController_3.getContactInfo(fakeValue[reactivemongo.bson.BSONObjectID]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.ContactInfoController",
+      "getContactInfo",
+      Seq(classOf[reactivemongo.bson.BSONObjectID]),
+      "GET",
+      this.prefix + """contact/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:18
+  private[this] lazy val controllers_CaseController_createCase10_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("cases")))
   )
-  private[this] lazy val controllers_CaseController_createCase8_invoker = createInvoker(
+  private[this] lazy val controllers_CaseController_createCase10_invoker = createInvoker(
     CaseController_0.createCase,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -261,11 +305,11 @@ class Routes(
     )
   )
 
-  // @LINE:18
-  private[this] lazy val controllers_PersonController_createPerson9_route = Route("POST",
+  // @LINE:20
+  private[this] lazy val controllers_PersonController_createPerson11_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("people")))
   )
-  private[this] lazy val controllers_PersonController_createPerson9_invoker = createInvoker(
+  private[this] lazy val controllers_PersonController_createPerson11_invoker = createInvoker(
     PersonController_1.createPerson,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -279,12 +323,12 @@ class Routes(
     )
   )
 
-  // @LINE:20
-  private[this] lazy val controllers_LawEnforcementController_createLawEnforcement10_route = Route("POST",
+  // @LINE:22
+  private[this] lazy val controllers_LawEnforcementController_createLawEnforcement12_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("lea")))
   )
-  private[this] lazy val controllers_LawEnforcementController_createLawEnforcement10_invoker = createInvoker(
-    LawEnforcementController_3.createLawEnforcement,
+  private[this] lazy val controllers_LawEnforcementController_createLawEnforcement12_invoker = createInvoker(
+    LawEnforcementController_4.createLawEnforcement,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.LawEnforcementController",
@@ -297,12 +341,12 @@ class Routes(
     )
   )
 
-  // @LINE:22
-  private[this] lazy val controllers_VehicleController_createVehicle11_route = Route("POST",
+  // @LINE:24
+  private[this] lazy val controllers_VehicleController_createVehicle13_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("vehicle")))
   )
-  private[this] lazy val controllers_VehicleController_createVehicle11_invoker = createInvoker(
-    VehicleController_8.createVehicle,
+  private[this] lazy val controllers_VehicleController_createVehicle13_invoker = createInvoker(
+    VehicleController_9.createVehicle,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.VehicleController",
@@ -315,11 +359,11 @@ class Routes(
     )
   )
 
-  // @LINE:24
-  private[this] lazy val controllers_NarrativeController_createNarrative12_route = Route("POST",
+  // @LINE:26
+  private[this] lazy val controllers_NarrativeController_createNarrative14_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("narrative")))
   )
-  private[this] lazy val controllers_NarrativeController_createNarrative12_invoker = createInvoker(
+  private[this] lazy val controllers_NarrativeController_createNarrative14_invoker = createInvoker(
     NarrativeController_2.createNarrative,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -333,12 +377,12 @@ class Routes(
     )
   )
 
-  // @LINE:26
-  private[this] lazy val controllers_AddressController_createAddress13_route = Route("POST",
+  // @LINE:28
+  private[this] lazy val controllers_AddressController_createAddress15_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("address")))
   )
-  private[this] lazy val controllers_AddressController_createAddress13_invoker = createInvoker(
-    AddressController_5.createAddress,
+  private[this] lazy val controllers_AddressController_createAddress15_invoker = createInvoker(
+    AddressController_6.createAddress,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.AddressController",
@@ -351,11 +395,29 @@ class Routes(
     )
   )
 
-  // @LINE:29
-  private[this] lazy val controllers_CaseController_deleteCase14_route = Route("DELETE",
+  // @LINE:30
+  private[this] lazy val controllers_ContactInfoController_createContactInfo16_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("contact")))
+  )
+  private[this] lazy val controllers_ContactInfoController_createContactInfo16_invoker = createInvoker(
+    ContactInfoController_3.createContactInfo,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.ContactInfoController",
+      "createContactInfo",
+      Nil,
+      "POST",
+      this.prefix + """contact""",
+      """""",
+      Seq("""nocsrf""")
+    )
+  )
+
+  // @LINE:33
+  private[this] lazy val controllers_CaseController_deleteCase17_route = Route("DELETE",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("cases/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_CaseController_deleteCase14_invoker = createInvoker(
+  private[this] lazy val controllers_CaseController_deleteCase17_invoker = createInvoker(
     CaseController_0.deleteCase(fakeValue[reactivemongo.bson.BSONObjectID]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -369,11 +431,11 @@ class Routes(
     )
   )
 
-  // @LINE:31
-  private[this] lazy val controllers_PersonController_deletePerson15_route = Route("DELETE",
+  // @LINE:35
+  private[this] lazy val controllers_PersonController_deletePerson18_route = Route("DELETE",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("people/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_PersonController_deletePerson15_invoker = createInvoker(
+  private[this] lazy val controllers_PersonController_deletePerson18_invoker = createInvoker(
     PersonController_1.deletePerson(fakeValue[reactivemongo.bson.BSONObjectID]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -387,12 +449,12 @@ class Routes(
     )
   )
 
-  // @LINE:33
-  private[this] lazy val controllers_LawEnforcementController_deleteLawEnforcement16_route = Route("DELETE",
+  // @LINE:37
+  private[this] lazy val controllers_LawEnforcementController_deleteLawEnforcement19_route = Route("DELETE",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("lea/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_LawEnforcementController_deleteLawEnforcement16_invoker = createInvoker(
-    LawEnforcementController_3.deleteLawEnforcement(fakeValue[reactivemongo.bson.BSONObjectID]),
+  private[this] lazy val controllers_LawEnforcementController_deleteLawEnforcement19_invoker = createInvoker(
+    LawEnforcementController_4.deleteLawEnforcement(fakeValue[reactivemongo.bson.BSONObjectID]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.LawEnforcementController",
@@ -405,12 +467,12 @@ class Routes(
     )
   )
 
-  // @LINE:35
-  private[this] lazy val controllers_VehicleController_deleteVehicle17_route = Route("DELETE",
+  // @LINE:39
+  private[this] lazy val controllers_VehicleController_deleteVehicle20_route = Route("DELETE",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("vehicle/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_VehicleController_deleteVehicle17_invoker = createInvoker(
-    VehicleController_8.deleteVehicle(fakeValue[reactivemongo.bson.BSONObjectID]),
+  private[this] lazy val controllers_VehicleController_deleteVehicle20_invoker = createInvoker(
+    VehicleController_9.deleteVehicle(fakeValue[reactivemongo.bson.BSONObjectID]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.VehicleController",
@@ -423,11 +485,11 @@ class Routes(
     )
   )
 
-  // @LINE:37
-  private[this] lazy val controllers_NarrativeController_deleteNarrative18_route = Route("DELETE",
+  // @LINE:41
+  private[this] lazy val controllers_NarrativeController_deleteNarrative21_route = Route("DELETE",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("narrative/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_NarrativeController_deleteNarrative18_invoker = createInvoker(
+  private[this] lazy val controllers_NarrativeController_deleteNarrative21_invoker = createInvoker(
     NarrativeController_2.deleteNarrative(fakeValue[reactivemongo.bson.BSONObjectID]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -441,12 +503,12 @@ class Routes(
     )
   )
 
-  // @LINE:39
-  private[this] lazy val controllers_AddressController_deleteAddress19_route = Route("DELETE",
+  // @LINE:43
+  private[this] lazy val controllers_AddressController_deleteAddress22_route = Route("DELETE",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("address/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_AddressController_deleteAddress19_invoker = createInvoker(
-    AddressController_5.deleteAddress(fakeValue[reactivemongo.bson.BSONObjectID]),
+  private[this] lazy val controllers_AddressController_deleteAddress22_invoker = createInvoker(
+    AddressController_6.deleteAddress(fakeValue[reactivemongo.bson.BSONObjectID]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.AddressController",
@@ -459,12 +521,30 @@ class Routes(
     )
   )
 
-  // @LINE:43
-  private[this] lazy val controllers_ApiDocsController_redirectToDocs20_route = Route("GET",
+  // @LINE:45
+  private[this] lazy val controllers_ContactInfoController_deleteContactInfo23_route = Route("DELETE",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("contact/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val controllers_ContactInfoController_deleteContactInfo23_invoker = createInvoker(
+    ContactInfoController_3.deleteContactInfo(fakeValue[reactivemongo.bson.BSONObjectID]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.ContactInfoController",
+      "deleteContactInfo",
+      Seq(classOf[reactivemongo.bson.BSONObjectID]),
+      "DELETE",
+      this.prefix + """contact/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq("""nocsrf""")
+    )
+  )
+
+  // @LINE:48
+  private[this] lazy val controllers_ApiDocsController_redirectToDocs24_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix)))
   )
-  private[this] lazy val controllers_ApiDocsController_redirectToDocs20_invoker = createInvoker(
-    ApiDocsController_4.redirectToDocs,
+  private[this] lazy val controllers_ApiDocsController_redirectToDocs24_invoker = createInvoker(
+    ApiDocsController_5.redirectToDocs,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.ApiDocsController",
@@ -477,12 +557,12 @@ class Routes(
     )
   )
 
-  // @LINE:44
-  private[this] lazy val controllers_ApiHelpController_getResources21_route = Route("GET",
+  // @LINE:49
+  private[this] lazy val controllers_ApiHelpController_getResources25_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("swagger.json")))
   )
-  private[this] lazy val controllers_ApiHelpController_getResources21_invoker = createInvoker(
-    ApiHelpController_7.getResources,
+  private[this] lazy val controllers_ApiHelpController_getResources25_invoker = createInvoker(
+    ApiHelpController_8.getResources,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.ApiHelpController",
@@ -495,12 +575,12 @@ class Routes(
     )
   )
 
-  // @LINE:45
-  private[this] lazy val controllers_ApiDocsController_redirectToDocs22_route = Route("GET",
+  // @LINE:50
+  private[this] lazy val controllers_ApiDocsController_redirectToDocs26_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api-docs")))
   )
-  private[this] lazy val controllers_ApiDocsController_redirectToDocs22_invoker = createInvoker(
-    ApiDocsController_4.redirectToDocs,
+  private[this] lazy val controllers_ApiDocsController_redirectToDocs26_invoker = createInvoker(
+    ApiDocsController_5.redirectToDocs,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.ApiDocsController",
@@ -513,12 +593,12 @@ class Routes(
     )
   )
 
-  // @LINE:48
-  private[this] lazy val controllers_Assets_versioned23_route = Route("GET",
+  // @LINE:53
+  private[this] lazy val controllers_Assets_versioned27_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
-  private[this] lazy val controllers_Assets_versioned23_invoker = createInvoker(
-    Assets_6.versioned(fakeValue[String], fakeValue[Asset]),
+  private[this] lazy val controllers_Assets_versioned27_invoker = createInvoker(
+    Assets_7.versioned(fakeValue[String], fakeValue[Asset]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Assets",
@@ -549,13 +629,13 @@ class Routes(
     // @LINE:7
     case controllers_LawEnforcementController_getAllLea2_route(params@_) =>
       call { 
-        controllers_LawEnforcementController_getAllLea2_invoker.call(LawEnforcementController_3.getAllLea)
+        controllers_LawEnforcementController_getAllLea2_invoker.call(LawEnforcementController_4.getAllLea)
       }
   
     // @LINE:8
     case controllers_VehicleController_getAllVehicles3_route(params@_) =>
       call { 
-        controllers_VehicleController_getAllVehicles3_invoker.call(VehicleController_8.getAllVehicles)
+        controllers_VehicleController_getAllVehicles3_invoker.call(VehicleController_9.getAllVehicles)
       }
   
     // @LINE:9
@@ -567,115 +647,139 @@ class Routes(
     // @LINE:10
     case controllers_AddressController_getAllAddresses5_route(params@_) =>
       call { 
-        controllers_AddressController_getAllAddresses5_invoker.call(AddressController_5.getAllAddresses)
+        controllers_AddressController_getAllAddresses5_invoker.call(AddressController_6.getAllAddresses)
       }
   
-    // @LINE:12
-    case controllers_CaseController_getCase6_route(params@_) =>
-      call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
-        controllers_CaseController_getCase6_invoker.call(CaseController_0.getCase(id))
+    // @LINE:11
+    case controllers_ContactInfoController_getAllContactInfo6_route(params@_) =>
+      call { 
+        controllers_ContactInfoController_getAllContactInfo6_invoker.call(ContactInfoController_3.getAllContactInfo)
       }
   
     // @LINE:13
-    case controllers_AddressController_getAddress7_route(params@_) =>
+    case controllers_CaseController_getCase7_route(params@_) =>
       call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
-        controllers_AddressController_getAddress7_invoker.call(AddressController_5.getAddress(id))
+        controllers_CaseController_getCase7_invoker.call(CaseController_0.getCase(id))
       }
   
-    // @LINE:16
-    case controllers_CaseController_createCase8_route(params@_) =>
-      call { 
-        controllers_CaseController_createCase8_invoker.call(CaseController_0.createCase)
+    // @LINE:14
+    case controllers_AddressController_getAddress8_route(params@_) =>
+      call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
+        controllers_AddressController_getAddress8_invoker.call(AddressController_6.getAddress(id))
+      }
+  
+    // @LINE:15
+    case controllers_ContactInfoController_getContactInfo9_route(params@_) =>
+      call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
+        controllers_ContactInfoController_getContactInfo9_invoker.call(ContactInfoController_3.getContactInfo(id))
       }
   
     // @LINE:18
-    case controllers_PersonController_createPerson9_route(params@_) =>
+    case controllers_CaseController_createCase10_route(params@_) =>
       call { 
-        controllers_PersonController_createPerson9_invoker.call(PersonController_1.createPerson)
+        controllers_CaseController_createCase10_invoker.call(CaseController_0.createCase)
       }
   
     // @LINE:20
-    case controllers_LawEnforcementController_createLawEnforcement10_route(params@_) =>
+    case controllers_PersonController_createPerson11_route(params@_) =>
       call { 
-        controllers_LawEnforcementController_createLawEnforcement10_invoker.call(LawEnforcementController_3.createLawEnforcement)
+        controllers_PersonController_createPerson11_invoker.call(PersonController_1.createPerson)
       }
   
     // @LINE:22
-    case controllers_VehicleController_createVehicle11_route(params@_) =>
+    case controllers_LawEnforcementController_createLawEnforcement12_route(params@_) =>
       call { 
-        controllers_VehicleController_createVehicle11_invoker.call(VehicleController_8.createVehicle)
+        controllers_LawEnforcementController_createLawEnforcement12_invoker.call(LawEnforcementController_4.createLawEnforcement)
       }
   
     // @LINE:24
-    case controllers_NarrativeController_createNarrative12_route(params@_) =>
+    case controllers_VehicleController_createVehicle13_route(params@_) =>
       call { 
-        controllers_NarrativeController_createNarrative12_invoker.call(NarrativeController_2.createNarrative)
+        controllers_VehicleController_createVehicle13_invoker.call(VehicleController_9.createVehicle)
       }
   
     // @LINE:26
-    case controllers_AddressController_createAddress13_route(params@_) =>
+    case controllers_NarrativeController_createNarrative14_route(params@_) =>
       call { 
-        controllers_AddressController_createAddress13_invoker.call(AddressController_5.createAddress)
+        controllers_NarrativeController_createNarrative14_invoker.call(NarrativeController_2.createNarrative)
       }
   
-    // @LINE:29
-    case controllers_CaseController_deleteCase14_route(params@_) =>
-      call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
-        controllers_CaseController_deleteCase14_invoker.call(CaseController_0.deleteCase(id))
+    // @LINE:28
+    case controllers_AddressController_createAddress15_route(params@_) =>
+      call { 
+        controllers_AddressController_createAddress15_invoker.call(AddressController_6.createAddress)
       }
   
-    // @LINE:31
-    case controllers_PersonController_deletePerson15_route(params@_) =>
-      call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
-        controllers_PersonController_deletePerson15_invoker.call(PersonController_1.deletePerson(id))
+    // @LINE:30
+    case controllers_ContactInfoController_createContactInfo16_route(params@_) =>
+      call { 
+        controllers_ContactInfoController_createContactInfo16_invoker.call(ContactInfoController_3.createContactInfo)
       }
   
     // @LINE:33
-    case controllers_LawEnforcementController_deleteLawEnforcement16_route(params@_) =>
+    case controllers_CaseController_deleteCase17_route(params@_) =>
       call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
-        controllers_LawEnforcementController_deleteLawEnforcement16_invoker.call(LawEnforcementController_3.deleteLawEnforcement(id))
+        controllers_CaseController_deleteCase17_invoker.call(CaseController_0.deleteCase(id))
       }
   
     // @LINE:35
-    case controllers_VehicleController_deleteVehicle17_route(params@_) =>
+    case controllers_PersonController_deletePerson18_route(params@_) =>
       call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
-        controllers_VehicleController_deleteVehicle17_invoker.call(VehicleController_8.deleteVehicle(id))
+        controllers_PersonController_deletePerson18_invoker.call(PersonController_1.deletePerson(id))
       }
   
     // @LINE:37
-    case controllers_NarrativeController_deleteNarrative18_route(params@_) =>
+    case controllers_LawEnforcementController_deleteLawEnforcement19_route(params@_) =>
       call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
-        controllers_NarrativeController_deleteNarrative18_invoker.call(NarrativeController_2.deleteNarrative(id))
+        controllers_LawEnforcementController_deleteLawEnforcement19_invoker.call(LawEnforcementController_4.deleteLawEnforcement(id))
       }
   
     // @LINE:39
-    case controllers_AddressController_deleteAddress19_route(params@_) =>
+    case controllers_VehicleController_deleteVehicle20_route(params@_) =>
       call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
-        controllers_AddressController_deleteAddress19_invoker.call(AddressController_5.deleteAddress(id))
+        controllers_VehicleController_deleteVehicle20_invoker.call(VehicleController_9.deleteVehicle(id))
+      }
+  
+    // @LINE:41
+    case controllers_NarrativeController_deleteNarrative21_route(params@_) =>
+      call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
+        controllers_NarrativeController_deleteNarrative21_invoker.call(NarrativeController_2.deleteNarrative(id))
       }
   
     // @LINE:43
-    case controllers_ApiDocsController_redirectToDocs20_route(params@_) =>
-      call { 
-        controllers_ApiDocsController_redirectToDocs20_invoker.call(ApiDocsController_4.redirectToDocs)
-      }
-  
-    // @LINE:44
-    case controllers_ApiHelpController_getResources21_route(params@_) =>
-      call { 
-        controllers_ApiHelpController_getResources21_invoker.call(ApiHelpController_7.getResources)
+    case controllers_AddressController_deleteAddress22_route(params@_) =>
+      call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
+        controllers_AddressController_deleteAddress22_invoker.call(AddressController_6.deleteAddress(id))
       }
   
     // @LINE:45
-    case controllers_ApiDocsController_redirectToDocs22_route(params@_) =>
-      call { 
-        controllers_ApiDocsController_redirectToDocs22_invoker.call(ApiDocsController_4.redirectToDocs)
+    case controllers_ContactInfoController_deleteContactInfo23_route(params@_) =>
+      call(params.fromPath[reactivemongo.bson.BSONObjectID]("id", None)) { (id) =>
+        controllers_ContactInfoController_deleteContactInfo23_invoker.call(ContactInfoController_3.deleteContactInfo(id))
       }
   
     // @LINE:48
-    case controllers_Assets_versioned23_route(params@_) =>
+    case controllers_ApiDocsController_redirectToDocs24_route(params@_) =>
+      call { 
+        controllers_ApiDocsController_redirectToDocs24_invoker.call(ApiDocsController_5.redirectToDocs)
+      }
+  
+    // @LINE:49
+    case controllers_ApiHelpController_getResources25_route(params@_) =>
+      call { 
+        controllers_ApiHelpController_getResources25_invoker.call(ApiHelpController_8.getResources)
+      }
+  
+    // @LINE:50
+    case controllers_ApiDocsController_redirectToDocs26_route(params@_) =>
+      call { 
+        controllers_ApiDocsController_redirectToDocs26_invoker.call(ApiDocsController_5.redirectToDocs)
+      }
+  
+    // @LINE:53
+    case controllers_Assets_versioned27_route(params@_) =>
       call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
-        controllers_Assets_versioned23_invoker.call(Assets_6.versioned(path, file))
+        controllers_Assets_versioned27_invoker.call(Assets_7.versioned(path, file))
       }
   }
 }

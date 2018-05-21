@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/Users/seech/call_center/conf/routes
-// @DATE:Sun May 20 22:20:20 EDT 2018
+// @DATE:Sun May 20 22:58:55 EDT 2018
 
 import play.api.mvc.Call
 
@@ -25,13 +25,13 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "people")
     }
   
-    // @LINE:18
+    // @LINE:20
     def createPerson(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "people")
     }
   
-    // @LINE:31
+    // @LINE:35
     def deletePerson(id:reactivemongo.bson.BSONObjectID): Call = {
       
       Call("DELETE", _prefix + { _defaultPrefix } + "people/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].unbind("id", id)))
@@ -39,14 +39,14 @@ package controllers {
   
   }
 
-  // @LINE:48
+  // @LINE:53
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:48
+    // @LINE:53
     def versioned(file:Asset): Call = {
       implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))
@@ -61,13 +61,13 @@ package controllers {
     }
 
   
-    // @LINE:37
+    // @LINE:41
     def deleteNarrative(id:reactivemongo.bson.BSONObjectID): Call = {
       
       Call("DELETE", _prefix + { _defaultPrefix } + "narrative/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].unbind("id", id)))
     }
   
-    // @LINE:24
+    // @LINE:26
     def createNarrative(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "narrative")
@@ -81,14 +81,14 @@ package controllers {
   
   }
 
-  // @LINE:44
+  // @LINE:49
   class ReverseApiHelpController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:44
+    // @LINE:49
     def getResources(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "swagger.json")
@@ -103,13 +103,13 @@ package controllers {
     }
 
   
-    // @LINE:33
+    // @LINE:37
     def deleteLawEnforcement(id:reactivemongo.bson.BSONObjectID): Call = {
       
       Call("DELETE", _prefix + { _defaultPrefix } + "lea/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].unbind("id", id)))
     }
   
-    // @LINE:20
+    // @LINE:22
     def createLawEnforcement(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "lea")
@@ -123,6 +123,39 @@ package controllers {
   
   }
 
+  // @LINE:11
+  class ReverseContactInfoController(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:45
+    def deleteContactInfo(id:reactivemongo.bson.BSONObjectID): Call = {
+      
+      Call("DELETE", _prefix + { _defaultPrefix } + "contact/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].unbind("id", id)))
+    }
+  
+    // @LINE:30
+    def createContactInfo(): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "contact")
+    }
+  
+    // @LINE:15
+    def getContactInfo(id:reactivemongo.bson.BSONObjectID): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "contact/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].unbind("id", id)))
+    }
+  
+    // @LINE:11
+    def getAllContactInfo(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "contact")
+    }
+  
+  }
+
   // @LINE:8
   class ReverseVehicleController(_prefix: => String) {
     def _defaultPrefix: String = {
@@ -130,13 +163,13 @@ package controllers {
     }
 
   
-    // @LINE:35
+    // @LINE:39
     def deleteVehicle(id:reactivemongo.bson.BSONObjectID): Call = {
       
       Call("DELETE", _prefix + { _defaultPrefix } + "vehicle/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].unbind("id", id)))
     }
   
-    // @LINE:22
+    // @LINE:24
     def createVehicle(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "vehicle")
@@ -157,13 +190,13 @@ package controllers {
     }
 
   
-    // @LINE:16
+    // @LINE:18
     def createCase(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "cases")
     }
   
-    // @LINE:29
+    // @LINE:33
     def deleteCase(id:reactivemongo.bson.BSONObjectID): Call = {
       
       Call("DELETE", _prefix + { _defaultPrefix } + "cases/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].unbind("id", id)))
@@ -175,7 +208,7 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "cases")
     }
   
-    // @LINE:12
+    // @LINE:13
     def getCase(id:reactivemongo.bson.BSONObjectID): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "cases/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].unbind("id", id)))
@@ -190,13 +223,13 @@ package controllers {
     }
 
   
-    // @LINE:39
+    // @LINE:43
     def deleteAddress(id:reactivemongo.bson.BSONObjectID): Call = {
       
       Call("DELETE", _prefix + { _defaultPrefix } + "address/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].unbind("id", id)))
     }
   
-    // @LINE:13
+    // @LINE:14
     def getAddress(id:reactivemongo.bson.BSONObjectID): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "address/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].unbind("id", id)))
@@ -208,7 +241,7 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "address")
     }
   
-    // @LINE:26
+    // @LINE:28
     def createAddress(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "address")
@@ -216,19 +249,19 @@ package controllers {
   
   }
 
-  // @LINE:43
+  // @LINE:48
   class ReverseApiDocsController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:43
+    // @LINE:48
     def redirectToDocs(): Call = {
     
       () match {
       
-        // @LINE:43
+        // @LINE:48
         case ()  =>
           
           Call("GET", _prefix)

@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/Users/seech/call_center/conf/routes
-// @DATE:Sun May 20 22:20:20 EDT 2018
+// @DATE:Sun May 20 22:58:55 EDT 2018
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -30,7 +30,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:18
+    // @LINE:20
     def createPerson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.PersonController.createPerson",
       """
@@ -40,7 +40,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:31
+    // @LINE:35
     def deletePerson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.PersonController.deletePerson",
       """
@@ -52,7 +52,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:48
+  // @LINE:53
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -60,7 +60,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:48
+    // @LINE:53
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """
@@ -80,7 +80,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:37
+    // @LINE:41
     def deleteNarrative: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.NarrativeController.deleteNarrative",
       """
@@ -90,7 +90,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:24
+    // @LINE:26
     def createNarrative: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.NarrativeController.createNarrative",
       """
@@ -112,7 +112,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:44
+  // @LINE:49
   class ReverseApiHelpController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -120,7 +120,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:44
+    // @LINE:49
     def getResources: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ApiHelpController.getResources",
       """
@@ -140,7 +140,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:33
+    // @LINE:37
     def deleteLawEnforcement: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.LawEnforcementController.deleteLawEnforcement",
       """
@@ -150,7 +150,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:20
+    // @LINE:22
     def createLawEnforcement: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.LawEnforcementController.createLawEnforcement",
       """
@@ -172,6 +172,56 @@ package controllers.javascript {
   
   }
 
+  // @LINE:11
+  class ReverseContactInfoController(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:45
+    def deleteContactInfo: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ContactInfoController.deleteContactInfo",
+      """
+        function(id0) {
+          return _wA({method:"DELETE", url:"""" + _prefix + { _defaultPrefix } + """" + "contact/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:30
+    def createContactInfo: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ContactInfoController.createContactInfo",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "contact"})
+        }
+      """
+    )
+  
+    // @LINE:15
+    def getContactInfo: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ContactInfoController.getContactInfo",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "contact/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[reactivemongo.bson.BSONObjectID]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:11
+    def getAllContactInfo: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ContactInfoController.getAllContactInfo",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "contact"})
+        }
+      """
+    )
+  
+  }
+
   // @LINE:8
   class ReverseVehicleController(_prefix: => String) {
 
@@ -180,7 +230,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:35
+    // @LINE:39
     def deleteVehicle: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.VehicleController.deleteVehicle",
       """
@@ -190,7 +240,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:22
+    // @LINE:24
     def createVehicle: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.VehicleController.createVehicle",
       """
@@ -220,7 +270,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:16
+    // @LINE:18
     def createCase: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.CaseController.createCase",
       """
@@ -230,7 +280,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:29
+    // @LINE:33
     def deleteCase: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.CaseController.deleteCase",
       """
@@ -250,7 +300,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:12
+    // @LINE:13
     def getCase: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.CaseController.getCase",
       """
@@ -270,7 +320,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:39
+    // @LINE:43
     def deleteAddress: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.AddressController.deleteAddress",
       """
@@ -280,7 +330,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:13
+    // @LINE:14
     def getAddress: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.AddressController.getAddress",
       """
@@ -300,7 +350,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:26
+    // @LINE:28
     def createAddress: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.AddressController.createAddress",
       """
@@ -312,7 +362,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:43
+  // @LINE:48
   class ReverseApiDocsController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -320,7 +370,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:43
+    // @LINE:48
     def redirectToDocs: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ApiDocsController.redirectToDocs",
       """
