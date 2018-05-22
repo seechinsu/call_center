@@ -1,5 +1,6 @@
 package controllers
 
+import client.KafkaProducerClient
 import io.swagger.annotations._
 import models.Case
 import reactivemongo.bson.BSONObjectID
@@ -14,7 +15,7 @@ import scala.concurrent.Future
 
 
 @Api(value = "/cases")
-class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepository) extends AbstractController(cc) {
+class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepository, kafka: KafkaProducerClient) extends AbstractController(cc) {
 
   @ApiOperation(
     value = "Find all Cases",

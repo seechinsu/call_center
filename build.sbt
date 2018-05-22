@@ -19,7 +19,7 @@ lazy val kafka = (project in file("kafka")).
     guice))
 
 lazy val caseApi = (project in file("case-api")).
-  dependsOn(common).
+  dependsOn(common, kafka).
   settings(Common.settings: _*).
   settings(routesImport += "play.modules.reactivemongo.PathBindables._").
   settings(libraryDependencies ++= Dependencies.crudDependencies).

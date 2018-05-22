@@ -1,7 +1,7 @@
 package client
 
-import client.ConsumerActor.{Commit, Fetch, GetInfo, InfoResult}
-import client.SupervisorActor.GetChild
+import client.ChildConsumer.{Commit, Fetch, GetInfo, InfoResult}
+import client.ConsumerParent.GetChild
 
 import akka.actor.SupervisorStrategy.{Escalate, Restart, Stop}
 import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, OneForOneStrategy, Props, Terminated}
@@ -19,7 +19,7 @@ class KafkaConsumerClient @Inject()(config: KafkaConsumerConfiguration) extends 
   val consumer = new KafkaConsumer[Array[Byte], Array[Byte]](config)
 
   def poll: Iterable[InputEvent] = {
-    consumer.poll(config.pollTimeout.toMillis).asScala map (InputEvent(_))
+    consumer.poll(config.pollInterval.toMillis).asScala map (InputEvent(_))
   }
 
   def commitSync: Unit = consumer.commitSync()
@@ -55,10 +55,10 @@ import scala.collection.JavaConversions._
 import scala.concurrent.duration._
 
 case class KafkaConsumerConfiguration(
-  brokers: String,
+  urls: String,
   topics: Seq[String],
   groupId: String,
-  pollTimeout: FiniteDuration,
+  pollInterval: FiniteDuration,
   sessionTimeout: FiniteDuration,
   offsetReset: String,
   maxPartitionFetchBytes: Long,
@@ -72,14 +72,14 @@ case class KafkaConsumerConfiguration(
   valueDeserializer: String = "org.apache.kafka.common.serialization.ByteArrayDeserializer",
   async: Boolean = false
 ) {
-  require(brokers.nonEmpty, "must set brokers in .conf or KAFKA_BROKERS in environment")
+  require(urls.nonEmpty, "must set urls in .conf or KAFKA_BROKERS in environment")
   require(groupId.nonEmpty, "must set groupId in .conf or KAKFA_GROUP_ID in enviroment")
   require(topics.nonEmpty, "must set topic in .conf or KAFKA_TOPIC in environment")
 }
 
 object KafkaConsumerConfiguration {
   val Topics = "topics"
-  val PollTimeout = "pollTimeout"
+  val PollTimeout = "pollInterval"
   val GroupId = "groupId"
   val SessionTimeout = "sessionTimeout"
   val OffsetReset = "offsetReset"
@@ -97,7 +97,7 @@ object KafkaConsumerConfiguration {
     props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, config.commitInterval.toMillis.toString)
     props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, config.keyDeserializer)
     props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, config.valueDeserializer)
-    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, config.brokers)
+    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, config.urls)
     props.put(ConsumerConfig.GROUP_ID_CONFIG, config.groupId)
     props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, config.sessionTimeout.toMillis.toString)
     props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, config.offsetReset)
@@ -109,8 +109,8 @@ object KafkaConsumerConfiguration {
     props
   }
 
-  def apply(brokers: String, config: Config): KafkaConsumerConfiguration = KafkaConsumerConfiguration(
-    brokers,
+  def apply(urls: String, config: Config): KafkaConsumerConfiguration = KafkaConsumerConfiguration(
+    urls,
     config.getStringList(Topics).toList,
     config.getString(GroupId),
     FiniteDuration.apply(config.getDuration(PollTimeout).toNanos, TimeUnit.NANOSECONDS),
@@ -126,14 +126,14 @@ object KafkaConsumerConfiguration {
 }
 
 class KafkaConsumerConfigProvider @Inject()(
-  brokerConfig: KafkaBrokerConfiguration,
-  @ConsumerIdentifier section: String,
+  brokerConfig: KafkaProducerConfiguration,
+  @NamedConsumer namedConsumer: String,
   configuration: Config
 ) extends Provider[KafkaConsumerConfiguration] {
   override def get(): KafkaConsumerConfiguration = {
     KafkaConsumerConfiguration(
-      brokerConfig.brokers,
-      configuration.getConfig("kafkaclient.consumer" + "." + section)
+      brokerConfig.urls,
+      configuration.getConfig("kafkaclient.consumer" + "." + namedConsumer)
     )
   }
 }
@@ -145,53 +145,49 @@ import java.lang.annotation.RetentionPolicy.RUNTIME
 import java.lang.annotation.{Retention, Target}
 
 
-@BindingAnnotation
-@Target(Array(Array(FIELD, PARAMETER, METHOD)))
-@Retention(RUNTIME) trait ConsumerIdentifier {}
-
-case class ConsumerActorConfiguration(
-  cooldown: FiniteDuration,
-  waitBetweenPolls: Boolean = false,
-  restartRetries: Int = 10,
-  restartDuration: FiniteDuration = 1.minute
+case class ChildConsumerConfiguration(
+  pauseInterval: FiniteDuration,
+  pollingPause: Boolean = false,
+  restartRetryCount: Int = 10,
+  retryDuration: FiniteDuration = 1.minute
 )
 
-object ConsumerActorConfiguration {
-  def apply(config: Config): ConsumerActorConfiguration = {
-    ConsumerActorConfiguration(
-      FiniteDuration.apply(config.getDuration("cooldown").toNanos, TimeUnit.NANOSECONDS),
-      config.getBoolean("waitBetweenPolls"),
-      config.getInt("restartRetries"),
-      FiniteDuration.apply(config.getDuration("restartDuration").toNanos, TimeUnit.NANOSECONDS)
+object ChildConsumerConfiguration {
+  def apply(config: Config): ChildConsumerConfiguration = {
+    ChildConsumerConfiguration(
+      FiniteDuration.apply(config.getDuration("pauseInterval").toNanos, TimeUnit.NANOSECONDS),
+      config.getBoolean("pollingPause"),
+      config.getInt("restartRetryCount"),
+      FiniteDuration.apply(config.getDuration("retryDuration").toNanos, TimeUnit.NANOSECONDS)
     )
   }
 }
 
-class ConsumerActorConfigProvider @Inject()(@ConsumerIdentifier section: String, configuration: Config)
-  extends Provider[ConsumerActorConfiguration] {
-  override def get(): ConsumerActorConfiguration = {
-    ConsumerActorConfiguration(configuration.getConfig("kafkaclient.consumer" + "." + section))
+class ChildConsumerConfigProvider @Inject()(@NamedConsumer namedConsumer: String, configuration: Config)
+  extends Provider[ChildConsumerConfiguration] {
+  override def get(): ChildConsumerConfiguration = {
+    ChildConsumerConfiguration(configuration.getConfig("kafkaclient.consumer" + "." + namedConsumer))
   }
 }
 
-class ConsumerSupervisor @Inject()(
+class ConsumerContainer @Inject()(
   actorSystem: ActorSystem,
-  config: ConsumerActorConfiguration,
-  @ConsumerIdentifier name: String,
+  config: ChildConsumerConfiguration,
+  @NamedConsumer name: String,
   consumer: KafkaConsumerClient,
   kafkaConfig: KafkaConsumerConfiguration,
   processor: ConsumerRecordProcessor,
   producer: KafkaProducerClient
 ) {
-  val consumerProps = ConsumerActor.props(config, consumer, processor, producer, kafkaConfig)
-  val supervisorActor = actorSystem.actorOf(
-    SupervisorActor.props(consumerProps, name, producer, config),
+  val consumerProps = ChildConsumer.props(config, consumer, processor, producer, kafkaConfig)
+  val consumerParent = actorSystem.actorOf(
+    ConsumerParent.props(consumerProps, name, producer, config),
     name + "-supervisor"
   )
 }
 
-class ConsumerActor(
-  config: ConsumerActorConfiguration,
+class ChildConsumer(
+  config: ChildConsumerConfiguration,
   consumer: KafkaConsumerClient,
   processor: ConsumerRecordProcessor,
   producer: KafkaProducerClient,
@@ -200,8 +196,8 @@ class ConsumerActor(
   extends Actor with ActorLogging {
 
   implicit val executionContext = context.dispatcher
-  val cooldown: FiniteDuration = config.cooldown
-  val waitBetweenPolls: Boolean = config.waitBetweenPolls
+  val pauseInterval: FiniteDuration = config.pauseInterval
+  val pollingPause: Boolean = config.pollingPause
 
   override def preStart: Unit = {
     log.debug("preStart")
@@ -239,10 +235,10 @@ class ConsumerActor(
     case Fetch =>
       if (!kafkaConfig.async) {
         val count = fetch
-        if (count > 0 && !waitBetweenPolls) {
+        if (count > 0 && !pollingPause) {
           self ! Fetch
         } else {
-          context.system.scheduler.scheduleOnce(cooldown, self, Fetch)
+          context.system.scheduler.scheduleOnce(pauseInterval, self, Fetch)
         }
       } else {
         var count = 0
@@ -252,10 +248,10 @@ class ConsumerActor(
           log.debug("async committing offsets")
           consumer.commitAsync
           log.debug(s"async $count records processed and committed")
-          if (count > 0 && !waitBetweenPolls) {
+          if (count > 0 && !pollingPause) {
             self ! Fetch
           } else {
-            context.system.scheduler.scheduleOnce(cooldown, self, Fetch)
+            context.system.scheduler.scheduleOnce(pauseInterval, self, Fetch)
           }
         }
       }
@@ -278,7 +274,7 @@ class ConsumerActor(
   }
 }
 
-object ConsumerActor {
+object ChildConsumer {
 
   sealed trait Control
 
@@ -291,25 +287,25 @@ object ConsumerActor {
   case class InfoResult(info: String) extends Control
 
   def props(
-    config: ConsumerActorConfiguration,
+    config: ChildConsumerConfiguration,
     consumer: KafkaConsumerClient,
     processor: ConsumerRecordProcessor,
     producer: KafkaProducerClient,
     kafkaConfig: KafkaConsumerConfiguration
   ): Props = {
-    Props(new ConsumerActor(config, consumer, processor, producer, kafkaConfig))
+    Props(new ChildConsumer(config, consumer, processor, producer, kafkaConfig))
   }
 }
 
-class SupervisorActor(
+class ConsumerParent(
   child: Props,
   childName: String,
   producer: KafkaProducerClient,
-  config: ConsumerActorConfiguration
+  config: ChildConsumerConfiguration
 ) extends Actor with ActorLogging {
 
   override val supervisorStrategy =
-    OneForOneStrategy(maxNrOfRetries = config.restartRetries, withinTimeRange = config.restartDuration) {
+    OneForOneStrategy(maxNrOfRetries = config.restartRetryCount, withinTimeRange = config.retryDuration) {
       case e: Exception =>
         childRestartHook(e)
         Restart
@@ -346,7 +342,7 @@ class SupervisorActor(
   }
 }
 
-object SupervisorActor {
+object ConsumerParent {
 
   case object GetChild
 
@@ -356,8 +352,8 @@ object SupervisorActor {
     child: Props,
     childName: String,
     producer: KafkaProducerClient,
-    config: ConsumerActorConfiguration
+    config: ChildConsumerConfiguration
   ): Props = {
-    Props(new SupervisorActor(child, childName, producer, config))
+    Props(new ConsumerParent(child, childName, producer, config))
   }
 }

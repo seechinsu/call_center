@@ -1,4 +1,4 @@
-import client.{KafkaBrokerConfiguration, KafkaBrokerConfigurationProvider, KafkaProducerClient, KafkaProducerConfigProvider, KafkaProducerConfiguration}
+import client.{KafkaProducerConfiguration, KafkaProducerClient, KafkaProducerConfigProvider}
 
 import com.google.inject.PrivateModule
 
@@ -11,7 +11,6 @@ class ProducerModule extends PrivateModule {
     bind(classOf[KafkaProducerConfiguration]).toProvider(classOf[KafkaProducerConfigProvider])
     bind(classOf[KafkaProducerClient]).asEagerSingleton()
     expose(classOf[KafkaProducerClient])
-    bind(classOf[KafkaBrokerConfiguration]).toProvider(classOf[KafkaBrokerConfigurationProvider])
   }
 
 }

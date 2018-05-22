@@ -1,7 +1,7 @@
 import akka.util.ByteString
 import com.typesafe.scalalogging.LazyLogging
 import org.json4s.{CustomSerializer, JNull, JString, MappingException, NoTypeHints}
-import org.json.ext._
+import org.json4s.ext._
 import org.json4s.JsonAST.JInt
 import org.json4s.ext._
 import org.json4s.native.Serialization

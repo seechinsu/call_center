@@ -51,7 +51,7 @@ import javax.inject.{Inject, Provider}
 import scala.concurrent.duration.FiniteDuration
 
 case class KafkaProducerConfiguration(
-  brokers: String,
+  urls: String,
   acks: String,
   retries: Int,
   batchSize: Int,
@@ -61,7 +61,7 @@ case class KafkaProducerConfiguration(
   keySerializer: String = "org.apache.kafka.common.serialization.ByteArraySerializer",
   valueSerializer: String = "org.apache.kafka.common.serialization.ByteArraySerializer"
 ) {
-  require(brokers.nonEmpty, "must set kafkaclient.brokers in .conf or KAFKA_BROKERS in environment")
+  require(urls.nonEmpty, "must set kafkaclient.urls in .conf or KAFKA_BROKERS in environment")
 }
 
 object KafkaProducerConfiguration {
@@ -85,7 +85,7 @@ object KafkaProducerConfiguration {
   implicit def toProperties(config: KafkaProducerConfiguration): Properties = {
     // field names defined by java client
     val props: Properties = new Properties
-    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, config.brokers)
+    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, config.urls)
     props.put(ProducerConfig.ACKS_CONFIG, config.acks.toString)
     props.put(ProducerConfig.RETRIES_CONFIG, config.retries.toString)
     props.put(ProducerConfig.BATCH_SIZE_CONFIG, config.batchSize.toString)
@@ -96,9 +96,9 @@ object KafkaProducerConfiguration {
     props
   }
 
-  def apply(brokers: String, config: Config): KafkaProducerConfiguration = {
+  def apply(urls: String, config: Config): KafkaProducerConfiguration = {
     new KafkaProducerConfiguration(
-      brokers,
+      urls,
       config.getString(Acks),
       config.getInt(Retries),
       config.getInt(BatchSize),
@@ -114,18 +114,18 @@ class KafkaProducerConfigProvider @Inject()(
   configuration: Config
 ) extends Provider[KafkaProducerConfiguration] {
   override def get(): KafkaProducerConfiguration = {
-    KafkaProducerConfiguration(brokerConfig.brokers, configuration.getConfig("kafkaclient.producer"))
+    KafkaProducerConfiguration(brokerConfig.urls, configuration.getConfig("kafkaclient.producer"))
   }
 }
 
-case class KafkaBrokerConfiguration(brokers: String)
+case class KafkaBrokerConfiguration(urls: String)
 
 object KafkaBrokerConfiguration {
-  val Brokers = "brokers"
+  val urls = "urls"
 
   def apply(config: Config): KafkaBrokerConfiguration = {
     KafkaBrokerConfiguration(
-      config.getString(Brokers)
+      config.getString(urls)
     )
   }
 }
@@ -153,11 +153,11 @@ object EventWrapper {
   }
   
   def apply(event: Event): EventWrapper = {
-    apply(hyphenify(event.eventType), serialize(event))
+    apply(hyphenify(event.topicName), serialize(event))
   }
   implicit def toProducerRecord(record: EventWrapper): ProducerRecord[Array[Byte], Array[Byte]] = {
-    val key = if (record.key.isEmpty) null else record.key.toArray // scalastyle:off null
-    val value = if (record.value.isEmpty) null else record.value.toArray // scalastyle:off null
+    val key = if (record.key.isEmpty) null else record.key.toArray
+    val value = if (record.value.isEmpty) null else record.value.toArray
     new ProducerRecord[Array[Byte], Array[Byte]](record.topic, key, value)
   }
 
@@ -169,7 +169,7 @@ object EventWrapper {
 }
 
 trait Event extends Product {
-  val eventType: String
+  val topicName: String
 }
 
 case class InputEvent(topic: String, partition: Int, offset: Long, key: ByteString, value: ByteString) {
