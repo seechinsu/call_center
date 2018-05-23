@@ -1,6 +1,10 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
+
+GET       /search                     controllers.CaseSearchController.getAll
+GET       /search/:keyword            controllers.CaseSearchController.searchKeyword(keyword: String)
+
 # Swagger docs
 GET       /                           controllers.ApiDocsController.redirectToDocs
 GET       /swagger.json               controllers.ApiHelpController.getResources
@@ -8,3 +12,4 @@ GET       /api-docs                   controllers.ApiDocsController.redirectToDo
 
 # Map static resources from the /public folder to the /assets URL path
 GET       /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+

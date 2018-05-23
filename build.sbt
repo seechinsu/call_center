@@ -51,4 +51,9 @@ lazy val worker = (project in file("case-worker")).
   enablePlugins(PlayScala, BuildInfoPlugin)
 
 lazy val root = (project in file(".")).
-  aggregate(common, caseApi)
+  aggregate(caseApi, caseSearch, worker)
+  .settings(
+      run := {
+          (run in caseApi in Compile).evaluated
+      }
+  )
