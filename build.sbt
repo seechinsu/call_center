@@ -1,21 +1,54 @@
-name := "play-swagger-reactivemongo"
+name := MyBuild.NamePrefix + "root"
 
-version := "1.0-SNAPSHOT"
+version := "0.0.1"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+scalaVersion := "2.11.8"
 
-scalaVersion := "2.12.4"
+lazy val common = project.
+  settings(Common.settings: _*).
+  settings(libraryDependencies ++= Dependencies.json).
+  settings(libraryDependencies ++= Dependencies.mongo).
+  settings(libraryDependencies ++= Dependencies.solr).
+  settings(libraryDependencies ++= Seq(
+    guice))
 
-val reactiveMongoVer = "0.13.0-play26"
+lazy val kafka = (project in file("kafka")).
+  settings(Common.settings: _*).
+  settings(libraryDependencies ++= Dependencies.kafka).
+  settings(libraryDependencies ++= Seq(
+    guice))
 
-libraryDependencies ++= Seq(
-  guice,
-  "org.reactivemongo"      %% "play2-reactivemongo" % reactiveMongoVer,
-  "io.swagger"             %% "swagger-play2"       % "1.6.0",
-  "org.webjars"            %  "swagger-ui"          % "3.2.2",
-  "org.scalatestplus.play" %% "scalatestplus-play"  % "3.1.1" % Test
-)
+lazy val caseApi = (project in file("case-api")).
+  dependsOn(common, kafka).
+  settings(Common.settings: _*).
+  settings(routesImport += "play.modules.reactivemongo.PathBindables._").
+  settings(libraryDependencies ++= Dependencies.crudDependencies).
+  settings(libraryDependencies ++= Seq(
+    guice,
+    ws,
+    javaWs,
+    specs2 % Test)).
+  enablePlugins(PlayScala)
 
-import play.sbt.routes.RoutesKeys
+lazy val caseSearch = (project in file("case-search")).
+  dependsOn(common).
+  settings(Common.settings: _*).
+  settings(libraryDependencies ++= Dependencies.crudDependencies).
+  settings(libraryDependencies ++= Seq(
+    ws,
+    javaWs,
+    specs2 % Test)).
+  enablePlugins(PlayScala)
 
-RoutesKeys.routesImport += "play.modules.reactivemongo.PathBindables._"
+
+lazy val worker = (project in file("case-worker")).
+  dependsOn(common, kafka).
+  settings(Common.settings: _*).
+  settings(libraryDependencies ++= Seq(
+    ws,
+    javaWs,
+    specs2 % Test)).
+  enablePlugins(PlayScala, BuildInfoPlugin)
+
+lazy val root = (project in file(".")).
+  aggregate(common, caseApi)

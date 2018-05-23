@@ -1,0 +1,20 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET       /cases                      controllers.CaseController.getAllCases
+GET       /cases/:id                  controllers.CaseController.getCase(id: reactivemongo.bson.BSONObjectID)
++ nocsrf
+POST      /cases                      controllers.CaseController.createCase
++ nocsrf
+PATCH     /cases/:id                  controllers.CaseController.updateCase(id: reactivemongo.bson.BSONObjectID)
++ nocsrf
+DELETE    /cases/:id                  controllers.CaseController.deleteCase(id: reactivemongo.bson.BSONObjectID)
+
+# Swagger docs
+GET       /                           controllers.ApiDocsController.redirectToDocs
+GET       /swagger.json               controllers.ApiHelpController.getResources
+GET       /api-docs                   controllers.ApiDocsController.redirectToDocs
+
+# Map static resources from the /public folder to the /assets URL path
+GET       /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
