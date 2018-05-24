@@ -1,3 +1,5 @@
+import java.util.Calendar
+
 name := MyBuild.NamePrefix + "root"
 
 version := "0.0.1"
@@ -18,7 +20,7 @@ lazy val kafka = (project in file("kafka")).
   settings(libraryDependencies ++= Seq(
     guice))
 
-lazy val caseApi = (project in file("case-api")).
+lazy val case_api = (project in file("case-api")).
   dependsOn(common, kafka).
   settings(Common.settings: _*).
   settings(routesImport += "play.modules.reactivemongo.PathBindables._").
@@ -28,9 +30,20 @@ lazy val caseApi = (project in file("case-api")).
     ws,
     javaWs,
     specs2 % Test)).
-  enablePlugins(PlayScala)
+    settings(
+        Seq(
+            dockerRepository := Some("call.center"),
+            //dockerBaseImage := "openjdk:8-jdk-alpine",
+            packageName in Docker := name.value,
+            dockerUpdateLatest := true,
+            version in Docker := "latest",
+            defaultLinuxInstallLocation in Docker := s"/opt/${name.value}",
+            dockerEntrypoint := Seq("bin/%s" format executableScriptName.value, "-Dconfig.resource=docker.conf")
+        )
+    ).
+  enablePlugins(PlayScala, DockerPlugin)
 
-lazy val caseSearch = (project in file("case-search")).
+lazy val case_search = (project in file("case-search")).
   dependsOn(common).
   settings(Common.settings: _*).
   settings(libraryDependencies ++= Dependencies.crudDependencies).
@@ -41,19 +54,27 @@ lazy val caseSearch = (project in file("case-search")).
   enablePlugins(PlayScala)
 
 
-lazy val worker = (project in file("case-worker")).
+lazy val case_worker = (project in file("case-worker")).
   dependsOn(common, kafka).
   settings(Common.settings: _*).
   settings(libraryDependencies ++= Seq(
     ws,
     javaWs,
     specs2 % Test)).
+  settings(
+      buildInfoKeys := Seq[BuildInfoKey](
+          name,
+          version,
+          BuildInfoKey.action("buildTime")(Calendar.getInstance().getTime),
+          BuildInfoKey.action("commitHash")(sys.env.getOrElse("GIT_COMMIT","UNKNOWN"))),
+      buildInfoPackage := "call.center.worker"
+  ).
   enablePlugins(PlayScala, BuildInfoPlugin)
 
 lazy val root = (project in file(".")).
-  aggregate(caseApi, caseSearch, worker)
+  aggregate(case_api, case_search, case_worker)
   .settings(
       run := {
-          (run in caseApi in Compile).evaluated
+          (run in case_api in Compile).evaluated
       }
   )
