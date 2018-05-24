@@ -13,5 +13,4 @@ class ApiDocsController @Inject()(cc: ControllerComponents, configuration: Confi
       queryString = Map("url" -> Seq(s"$basePath/swagger.json"))
     )
   }
-
 }

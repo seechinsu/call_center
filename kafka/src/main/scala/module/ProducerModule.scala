@@ -1,5 +1,6 @@
-import client.{KafkaProducerConfiguration, KafkaProducerClient, KafkaProducerConfigProvider}
+package module
 
+import client._
 import com.google.inject.PrivateModule
 
 /**
@@ -8,6 +9,7 @@ import com.google.inject.PrivateModule
 class ProducerModule extends PrivateModule {
 
   override def configure(): Unit = {
+    bind(classOf[KafkaBrokerConfiguration]).toProvider(classOf[KafkaBrokerConfigurationProvider])
     bind(classOf[KafkaProducerConfiguration]).toProvider(classOf[KafkaProducerConfigProvider])
     bind(classOf[KafkaProducerClient]).asEagerSingleton()
     expose(classOf[KafkaProducerClient])
