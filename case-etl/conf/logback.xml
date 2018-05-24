@@ -1,0 +1,34 @@
+<configuration scan="true">
+
+<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        <level>${CONSOLE_LOG_LEVEL:-ALL}</level>
+    </filter>
+    <encoder>
+        <pattern>%relative %-5level [%t] %logger{25}: %message%n%rootException</pattern>
+    </encoder>
+</appender>
+
+<appender name="PAPERTRAIL" class="com.papertrailapp.logback.Syslog4jAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        <level>${PAPERTRAIL_LOG_LEVEL:-OFF}</level>
+    </filter>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+        <pattern>%-5level %logger{35}: %m%n%xEx</pattern>
+    </layout>
+
+    <syslogConfig class="org.productivity.java.syslog4j.impl.net.tcp.ssl.SSLTCPNetSyslogConfig">
+        <host>${PAPERTRAIL_HOST:-logs.papertrailapp.com}</host>
+        <port>${PAPERTRAIL_PORT:-24988}</port>
+        <ident>${PAPERTRAIL_ID:-local-audit-access}</ident>
+        <maxMessageLength>128000</maxMessageLength>
+    </syslogConfig>
+</appender>
+
+<root level="${LOG_LEVEL:-INFO}">
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="PAPERTRAIL"/>
+    <appender-ref ref="LOGGLY"/>
+</root>
+
+</configuration>

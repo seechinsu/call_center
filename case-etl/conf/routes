@@ -1,0 +1,9 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Health
+GET  /         audit.controllers.Health.index
+GET  /ping     audit.controllers.Health.ping
+GET  /info     audit.controllers.Health.info
+GET  /health   audit.controllers.Health.health
