@@ -3,7 +3,7 @@
 # ~~~~
 
 # Health
-GET  /         audit.controllers.Health.index
-GET  /ping     audit.controllers.Health.ping
-GET  /info     audit.controllers.Health.info
-GET  /health   audit.controllers.Health.health
+GET  /         controllers.Health.index()
+GET  /ping     controllers.Health.ping()
+GET  /info     controllers.Health.info()
+GET  /health   controllers.Health.health()

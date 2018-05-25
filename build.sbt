@@ -39,8 +39,6 @@ lazy val caseSearch = (project in file("case-search")).
   settings(libraryDependencies ++= Seq(
     ws,
     javaWs,
-    jdbc,
-    evolutions,
     specs2 % Test)).
   settings(
     buildInfoKeys := Seq[BuildInfoKey](
@@ -70,6 +68,8 @@ lazy val case_etl = (project in file("case-etl")).
   settings(libraryDependencies ++= Seq(
     ws,
     javaWs,
+    jdbc,
+    evolutions,
     specs2 % Test)).
   enablePlugins(PlayScala, BuildInfoPlugin)
 
