@@ -15,6 +15,7 @@ class QueueScheduler @Inject()(
   system: ActorSystem,
   config: Configuration,
   @Named("queueScheduler") scheduleInterval: ScheduleInterval,
+  dataPumpService: DataPumpService,
   queueService: QueueService
 )
   (implicit ec: ExecutionContext) extends LazyLogging {
@@ -28,6 +29,7 @@ class QueueScheduler @Inject()(
         val startDate = simpleDateFormatter.parse(start)
         val endDate = simpleDateFormatter.parse(end)
 
+        dataPumpService.pump(startDate)
         service match {
           case _ =>
             logger.error(s"scheduler unable to run with ($service, $start, $end) as $service is unsupported")
