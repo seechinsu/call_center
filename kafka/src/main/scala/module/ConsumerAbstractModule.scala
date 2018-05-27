@@ -17,6 +17,7 @@ abstract class ConsumerAbstractModule extends PrivateModule {
     bind(classOf[ChildConsumerConfiguration]).toProvider(classOf[ChildConsumerConfigProvider])
     bind(classOf[KafkaConsumerClient]).asEagerSingleton()
     bind(classOf[KafkaProducerConfiguration]).toProvider(classOf[KafkaProducerConfigProvider])
+    bind(classOf[KafkaBrokerConfiguration]).toProvider(classOf[KafkaBrokerConfigurationProvider])
     bindProcessor
   }
 }

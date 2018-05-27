@@ -2,9 +2,11 @@ package consumer
 
 import client.{ConsumerRecordProcessor, InputEvent}
 import models.Case
+import repositories.mongo.CaseRepository
 import module.ConsumerAbstractModule
 import reactivemongo.bson.BSONObjectID
 import repositories.solr.SolrCaseRepository
+import scala.concurrent.ExecutionContext
 
 import javax.inject.Inject
 import scala.concurrent.Future
@@ -17,7 +19,7 @@ class CaseAddedConsumerModule extends ConsumerAbstractModule {
   }
 }
 
-class MongoSolrCaseAddedETLProcessor @Inject()(solrRepository: SolrCaseRepository) extends ConsumerRecordProcessor {
+class MongoSolrCaseAddedETLProcessor @Inject()(solrRepository: SolrCaseRepository) (implicit ec: ExecutionContext) extends ConsumerRecordProcessor {
   override def processAsync(record: InputEvent): Future[Unit] = {
     serialize.deserialize[Case](record.value).map(solrRepository.addCase).getOrElse(Future.successful()).map(_ => ())
   }
@@ -31,7 +33,7 @@ class CaseUpdatedConsumerModule extends ConsumerAbstractModule {
   }
 }
 
-class MongoSolrCaseUpdatedETLProcessor @Inject()(solrRepository: SolrCaseRepository) extends ConsumerRecordProcessor {
+class MongoSolrCaseUpdatedETLProcessor @Inject()(solrRepository: SolrCaseRepository) (implicit ec: ExecutionContext) extends ConsumerRecordProcessor {
   override def processAsync(record: InputEvent): Future[Unit] = {
     serialize.deserialize[Case](record.value).map(
       c => solrRepository.updateCase(
@@ -54,8 +56,8 @@ case class CaseId(id: String)
 
 class MongoSolrCaseIdUpdatedETLProcessor @Inject()(
   solrRepository: SolrCaseRepository,
-  caseRepository: SolrCaseRepository
-) extends ConsumerRecordProcessor {
+  caseRepository: CaseRepository
+) (implicit ec: ExecutionContext) extends ConsumerRecordProcessor {
   override def processAsync(record: InputEvent): Future[Unit] = {
     serialize.deserialize[CaseId](record.value).map {
       cId =>
@@ -82,7 +84,7 @@ class CaseDeletedConsumerModule extends ConsumerAbstractModule {
   }
 }
 
-class MongoSolrCaseDeletedETLProcessor @Inject()(solrRepository: SolrCaseRepository) extends ConsumerRecordProcessor {
+class MongoSolrCaseDeletedETLProcessor @Inject()(solrRepository: SolrCaseRepository) (implicit ec: ExecutionContext) extends ConsumerRecordProcessor {
   override def processAsync(record: InputEvent): Future[Unit] = {
     serialize.deserialize[Case](record.value).map(
       c => solrRepository.deleteCase(

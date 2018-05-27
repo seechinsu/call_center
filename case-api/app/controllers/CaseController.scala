@@ -1,9 +1,10 @@
 package controllers
 
+import client.{EventWrapper, KafkaProducerClient}
 import io.swagger.annotations._
 import javax.inject.Inject
-import models.{Case}
-import repositories.mongo.{CaseRepository}
+import models.Case
+import repositories.mongo.CaseRepository
 import reactivemongo.bson.BSONObjectID
 import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, ControllerComponents}
@@ -12,7 +13,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 @Api(value = "/cases")
-class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepository) extends AbstractController(cc) {
+class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepository, producer: KafkaProducerClient) extends AbstractController(cc) {
 
   @ApiOperation(
     value = "Find all Case",
@@ -47,9 +48,9 @@ class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepositor
   )
   def createCase() = Action.async(parse.json) { req =>
     req.body.validate[Case].map { caseData =>
-      caseRepo.addCase(caseData).map { _ =>
-        Created
-      }
+      for { _ <- caseRepo.addCase(caseData)
+            _ <- producer.publish(EventWrapper.apply("case-added", serialize.serialize(caseData)))
+      } yield Created
     }.getOrElse(Future.successful(BadRequest("Invalid Case format")))
   }
 
