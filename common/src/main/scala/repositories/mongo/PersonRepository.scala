@@ -20,7 +20,9 @@ class PersonRepository @Inject()(implicit ec: ExecutionContext, reactiveMongoApi
   import Person._
   val logger = LazyLogger.apply(this.getClass.getName)
 
-  def personCollection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection("Person"))
+  val personCollection: Future[JSONCollection] = reactiveMongoApi.database.map{
+    case x => x.collection("Person")
+  }
 
   def getAll: Future[Seq[Person]] = {
     val query = Json.obj()

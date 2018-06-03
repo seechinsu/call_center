@@ -21,7 +21,9 @@ class VehicleRepository @Inject()(implicit ec: ExecutionContext, reactiveMongoAp
 
   val logger = LazyLogger.apply(this.getClass.getName)
 
-  def vehicleCollection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection("Vehicle"))
+  val vehicleCollection: Future[JSONCollection] = reactiveMongoApi.database.map{
+    case x => x.collection("Vehicle")
+  }
 
   def getAll: Future[Seq[Vehicle]] = {
     val query = Json.obj()

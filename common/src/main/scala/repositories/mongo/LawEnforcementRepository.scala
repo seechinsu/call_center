@@ -19,7 +19,9 @@ class LawEnforcementRepository @Inject()(implicit ec: ExecutionContext, reactive
   import LawEnforcement._
   val logger = LazyLogger.apply(this.getClass.getName)
 
-  def lawEnforcementCollection: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection("LawEnforcement"))
+  val lawEnforcementCollection: Future[JSONCollection] = reactiveMongoApi.database.map{
+    case x => x.collection("LawEnforcement")
+  }
 
   def getAll: Future[Seq[LawEnforcement]] = {
     val query = Json.obj()
