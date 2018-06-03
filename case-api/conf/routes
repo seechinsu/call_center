@@ -15,6 +15,8 @@ GET       /people/:id                 controllers.PersonController.getPerson(id:
 GET       /vehicle/:id                controllers.VehicleController.getVehicle(id: reactivemongo.bson.BSONObjectID)
 GET       /address/:id                controllers.AddressController.getAddress(id: reactivemongo.bson.BSONObjectID)
 GET       /contact/:id                controllers.ContactInfoController.getContactInfo(id: reactivemongo.bson.BSONObjectID)
+GET       /narrative/:id              controllers.NarrativeController.getNarrative(id: reactivemongo.bson.BSONObjectID)
+GET       /lea/:id                    controllers.LawEnforcementController.getLawEnforcement(id: reactivemongo.bson.BSONObjectID)
 
 + nocsrf
 POST      /cases                      controllers.CaseController.createCase

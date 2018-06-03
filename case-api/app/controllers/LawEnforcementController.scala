@@ -65,5 +65,17 @@ class LawEnforcementController @Inject()(cc: ControllerComponents, leaRepo: LawE
       case None => NotFound
     }
   }
+
+  @ApiOperation(
+    value = "Find an lea by id",
+    response = classOf[LawEnforcement]
+  )
+  def getLawEnforcement(@ApiParam(value = "The id of the lea to retrieve") leaId: BSONObjectID) = Action.async{ req =>
+    leaRepo.getLawEnforcement(leaId).map { maybeLawEnforcement =>
+      maybeLawEnforcement.map { lea =>
+        Ok(Json.toJson(lea))
+      }.getOrElse(NotFound)
+    }
+  }
 }
 

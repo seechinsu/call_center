@@ -15,10 +15,11 @@ object Narrative {
 
 case class NarrativeInfo(
                           author: String,
-                          narrtiveDate: Long = Instant.now().toEpochMilli,
+                          narrtiveCreateDateTime: Long = Instant.now().toEpochMilli,
                           narrativeType: String,
                           narrativeText: String
-)
+                          //narrtiveUpdateDateTime:
+                        )
 
 object NarrativeInfo {
   import play.api.libs.json._

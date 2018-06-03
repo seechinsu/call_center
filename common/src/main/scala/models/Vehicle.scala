@@ -26,17 +26,17 @@ object Vehicle {
 }
 
 case class VehicleInfo(
-                            year: String,
-                            make: String,
-                            model: String,
-                            vehicleStyle: String,
-                            vehicleColor: String,
-                            vehicleTagNumber: String,
-                            vehicleTagYear: String,
-                            vehicleTagState: String,
-                            vinNumber: String,
-                            notes: String
-                          )
+                        year: String,
+                        make: String,
+                        model: String,
+                        vehicleStyle: String,
+                        vehicleColor: String,
+                        vehicleTagNumber: String,
+                        vehicleTagYear: String,
+                        vehicleTagState: String,
+                        vinNumber: String,
+                        notes: Option[Seq[Narrative]]
+                      )
 
 object VehicleInfo {
   import play.api.libs.json._

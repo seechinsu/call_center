@@ -43,4 +43,10 @@ class NarrativeRepository @Inject()(implicit ec: ExecutionContext, reactiveMongo
     val selector = BSONDocument("_id" -> id)
     narrativeCollection.flatMap(_.findAndRemove(selector).map(_.result[Narrative]))
   }
+
+  def getNarrative(id: BSONObjectID): Future[Option[Narrative]] = {
+    val query = BSONDocument("_id" -> id)
+    narrativeCollection.flatMap(_.find(query).one[Narrative])
+  }
+
 }

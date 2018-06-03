@@ -13,11 +13,16 @@ object ContactInfo {
 }
 
 case class ContactInfoDetail(
-                              _id: Option[BSONObjectID]
-                              //mobilePhones: Seq[String],
-                              //homePhones: Seq[String],
-                              //workPhones: Seq[String],
-                              //emails: Seq[String]
+                              mobilePhones: Option[Seq[String]],
+                              homePhones: Option[Seq[String]],
+                              workPhones: Option[Seq[String]],
+                              generalEmails: Option[Seq[String]],
+                              generalPhones: Option[Seq[String]],
+                              directPhones: Option[Seq[String]],
+                              posterPhones: Option[Seq[String]],
+                              faxPhones: Option[Seq[String]],
+                              agencyEmails: Option[Seq[String]],
+                              officerEmails: Option[Seq[String]]
                             )
 
 object ContactInfoDetail {

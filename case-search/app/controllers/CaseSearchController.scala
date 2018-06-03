@@ -12,7 +12,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 class CaseSearchController @Inject()(cc: ControllerComponents, caseSearchRepo: SolrCaseRepository) extends AbstractController(cc) {
 
   @ApiOperation(
-    value = "Test solr query connection"
+    value = "Returns raw solr json response for *:*"
   )
   def getAll = Action.async {
     caseSearchRepo.getAll.map { items =>
@@ -21,10 +21,19 @@ class CaseSearchController @Inject()(cc: ControllerComponents, caseSearchRepo: S
   }
 
   @ApiOperation(
-    value = "Search by keyword"
+    value = "Search by query parameter, eg keyword or headline:*Dubai* or headline:*Dubai* AND byline:*FRIEDMAN*"
   )
-  def searchKeyword(@ApiParam(value = "Keyword to search by") keyword: String) = Action.async{
+  def searchKeyword(@ApiParam(value = "query parameter to search by") keyword: String) = Action.async{
     caseSearchRepo.searchKeyword(keyword).map { items =>
+      Ok(Json.toJson(items.toString))
+    }
+  }
+
+  @ApiOperation(
+    value = "Search by case id"
+  )
+  def searchId(@ApiParam(value = "case id to search by") caseId: String) = Action.async{
+    caseSearchRepo.searchKeyword(caseId).map { items =>
       Ok(Json.toJson(items.toString))
     }
   }

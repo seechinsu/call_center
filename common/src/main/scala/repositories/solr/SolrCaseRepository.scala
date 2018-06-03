@@ -19,8 +19,6 @@ import scala.concurrent.Future
 
 class SolrCaseRepository @Inject()(cc: ControllerComponents, config: Configuration) extends AbstractController(cc) {
 
-  //val solr = AsyncSolrClient(s"${config.underlying.getString("solrEndpoint")}/search")
-
   val solr = AsyncSolrClient("http://localhost:8983/solr/news")
 
   def getAll: Future[SolrDocumentList] = {
@@ -35,7 +33,9 @@ class SolrCaseRepository @Inject()(cc: ControllerComponents, config: Configurati
     }
   }
 
-  def getCase(id: BSONObjectID): Future[Option[Case]] = {
-    solr.query(new SolrQuery(s"id:${id.stringify}")).map(x => x.getBeans(classOf[Case]).asScala.headOption)
+  def getCase(id: BSONObjectID): Future[SolrDocumentList] = {
+    solr.query(new SolrQuery(s"id:${id.stringify}")).map {
+      qr => qr.getResults()
+    }
   }
 }

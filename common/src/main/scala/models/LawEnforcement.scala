@@ -15,31 +15,20 @@ object LawEnforcement {
 }
 
 case class LawEnforcementInfo(
-                       dateReported: LocalDate,
-                       assignedOfficer: String,
-                       respondingOfficer: String,
-                       department: String,
-                       unit: String,
-                       signedMediaWaiver: Boolean,
-                       receiveLeads: Boolean,
-                       //mobilePhone: Seq[String],
-                       //generalPhone: Seq[String],
-                       //directPhone: Seq[String],
-                       //posterPhone: Seq[String],
-                       //faxPhone: Seq[String],
-                       //agencyEmail: Seq[String],
-                       //officerEmail: Seq[String],
-                       ocaNumber: String,
-                       oriNumber: String,
-                       childIssuingAgency: String,
-                       streetAddress: String,
-                       city: String,
-                       zip: String,
-                       county: String,
-                       state: String,
-                       country: String,
-                       notes: String
-                     )
+                               dateReported: LocalDate,
+                               assignedOfficer: String,
+                               respondingOfficer: String,
+                               department: String,
+                               unit: String,
+                               signedMediaWaiver: Boolean,
+                               receiveLeads: Boolean,
+                               ocaNumber: String,
+                               oriNumber: String,
+                               childIssuingAgency: String,
+                               contactInfo: Option[Seq[ContactInfo]],
+                               addressInfo: Option[Seq[Address]],
+                               notes: Option[Seq[Narrative]]
+                             )
 
 object LawEnforcementInfo {
 

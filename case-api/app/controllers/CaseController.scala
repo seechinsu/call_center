@@ -48,9 +48,12 @@ class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepositor
   )
   def createCase() = Action.async(parse.json) { req =>
     req.body.validate[Case].map { caseData =>
-      for { _ <- caseRepo.addCase(caseData)
-            _ <- producer.publish(EventWrapper.apply("case-added", serialize.serialize(caseData)))
-      } yield Created
+//      for { _ <- caseRepo.addCase(caseData)
+//            _ <- producer.publish(EventWrapper.apply("case-added", serialize.serialize(caseData)))
+//      } yield Created
+      caseRepo.addCase(caseData).map { _ =>
+        Created
+      }
     }.getOrElse(Future.successful(BadRequest("Invalid Case format")))
   }
 

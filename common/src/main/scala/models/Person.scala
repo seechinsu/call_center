@@ -14,20 +14,19 @@ object Person {
 }
 
 case class PersonInfo(
-                            personId: String,
-                            personType: String,
-                            firstName: String,
-                            middleName: String,
-                            lastName: String,
-                            isCallerReluctant: Boolean,
-                            refused: Boolean,
-                            birthDate: LocalDate,
-                            agency: String,
-                            Sex: String
-                            //contactInfo: ContactInfo,
-                            //addressInfo: Seq[AddressInfo],
-                            //notes: Seq[Narrative]
-                          )
+                      personType: String,
+                      firstName: String,
+                      middleName: String,
+                      lastName: String,
+                      isCallerReluctant: Boolean,
+                      refused: Boolean,
+                      birthDate: LocalDate,
+                      agency: String,
+                      Sex: String,
+                      contactInfo: Option[Seq[ContactInfo]],
+                      addressInfo: Option[Seq[Address]],
+                      notes: Option[Seq[Narrative]]
+                     )
 
 object PersonInfo {
   import play.api.libs.json._

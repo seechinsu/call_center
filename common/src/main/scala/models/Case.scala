@@ -14,25 +14,24 @@ object Case {
 }
 
 case class PrimaryCaseInfo(
-                            _id: Option[BSONObjectID],
                             caseType: String,
                             requestType: String,
                             operator: String,
                             dateOfCall: Long = Instant.now().toEpochMilli,
-                            aniNumber: String,
-                            outOfRange: Boolean,
+                            aniNumber: Option[String],
+                            outOfRange: Option[Boolean],
                             source: String,
-                            referredBy: String,
-                            relatedCases: Int,
-                            events: String,
+                            referredBy: Option[String],
+                            relatedCases: Option[Int],
+                            events: Option[String],
                             amberAlertFlag: Boolean,
-                            sourceOrganization: String,
+                            sourceOrganization: Option[String],
                             referredToAmeco: Boolean,
-                            amecoNpo: String
-                            //lawEnforcementInfo: Seq[LawEnforcement],
-                            //vehicle: Seq[Vehicle],
-                            //narrative: Seq[Narrative],
-                            //people: Seq[Person]
+                            amecoNpo: Option[String],
+                            lawEnforcementInfo: Option[Seq[LawEnforcement]],
+                            vehicle: Option[Seq[Vehicle]],
+                            narrative: Option[Seq[Narrative]],
+                            people: Option[Seq[Person]]
 )
 
 object PrimaryCaseInfo {

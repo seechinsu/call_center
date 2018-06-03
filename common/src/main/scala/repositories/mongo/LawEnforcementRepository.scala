@@ -39,4 +39,9 @@ class LawEnforcementRepository @Inject()(implicit ec: ExecutionContext, reactive
     val selector = BSONDocument("_id" -> id)
     lawEnforcementCollection.flatMap(_.findAndRemove(selector).map(_.result[LawEnforcement]))
   }
+
+  def getLawEnforcement(id: BSONObjectID): Future[Option[LawEnforcement]] = {
+    val query = BSONDocument("_id" -> id)
+    lawEnforcementCollection.flatMap(_.find(query).one[LawEnforcement])
+  }
 }
