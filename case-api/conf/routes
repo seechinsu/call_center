@@ -3,6 +3,7 @@
 # ~~~~
 
 GET       /cases                      controllers.CaseController.getAllCases
+GET       /leads                      controllers.LeadController.getAllLeads
 GET       /people                     controllers.PersonController.getAllPeople
 GET       /lea                        controllers.LawEnforcementController.getAllLea
 GET       /vehicle                    controllers.VehicleController.getAllVehicles
@@ -11,6 +12,7 @@ GET       /address                    controllers.AddressController.getAllAddres
 GET       /contact                    controllers.ContactInfoController.getAllContactInfo
 
 GET       /cases/:id                  controllers.CaseController.getCase(id: reactivemongo.bson.BSONObjectID)
+GET       /leads/:id                  controllers.LeadController.getLead(id: reactivemongo.bson.BSONObjectID)
 GET       /people/:id                 controllers.PersonController.getPerson(id: reactivemongo.bson.BSONObjectID)
 GET       /vehicle/:id                controllers.VehicleController.getVehicle(id: reactivemongo.bson.BSONObjectID)
 GET       /address/:id                controllers.AddressController.getAddress(id: reactivemongo.bson.BSONObjectID)
@@ -20,6 +22,8 @@ GET       /lea/:id                    controllers.LawEnforcementController.getLa
 
 + nocsrf
 POST      /cases                      controllers.CaseController.createCase
++ nocsrf
+POST      /leads                      controllers.LeadController.createLead
 + nocsrf
 POST      /people                     controllers.PersonController.createPerson
 + nocsrf
@@ -35,6 +39,8 @@ POST      /contact                    controllers.ContactInfoController.createCo
 
 + nocsrf
 DELETE    /cases/:id                  controllers.CaseController.deleteCase(id: reactivemongo.bson.BSONObjectID)
++ nocsrf
+DELETE    /leads/:id                  controllers.LeadController.deleteLead(id: reactivemongo.bson.BSONObjectID)
 + nocsrf
 DELETE    /people/:id                 controllers.PersonController.deletePerson(id: reactivemongo.bson.BSONObjectID)
 + nocsrf

@@ -17,7 +17,7 @@ case class PrimaryCaseInfo(
                             caseType: String,
                             requestType: String,
                             operator: String,
-                            dateOfCall: Long = Instant.now().toEpochMilli,
+                            dateOfIntake: Long = Instant.now().toEpochMilli,
                             aniNumber: Option[String],
                             outOfRange: Option[Boolean],
                             source: String,
@@ -28,10 +28,12 @@ case class PrimaryCaseInfo(
                             sourceOrganization: Option[String],
                             referredToAmeco: Boolean,
                             amecoNpo: Option[String],
+                            lead: Option[Seq[Lead]],
                             lawEnforcementInfo: Option[Seq[LawEnforcement]],
                             vehicle: Option[Seq[Vehicle]],
                             narrative: Option[Seq[Narrative]],
                             people: Option[Seq[Person]]
+
 )
 
 object PrimaryCaseInfo {
