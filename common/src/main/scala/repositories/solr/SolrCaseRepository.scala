@@ -19,7 +19,8 @@ import scala.concurrent.Future
 
 class SolrCaseRepository @Inject()(cc: ControllerComponents, config: Configuration) extends AbstractController(cc) {
 
-  val solr = AsyncSolrClient("http://localhost:8983/solr/news")
+  //val solr = AsyncSolrClient("http://localhost:8983/solr/news")
+  val solr = AsyncSolrClient(s"${config.underlying.getString("solrEndpoint")}/case")
 
   def getAll: Future[SolrDocumentList] = {
     solr.query(new SolrQuery("*:*").setParam("wt","json")).map {
@@ -37,5 +38,19 @@ class SolrCaseRepository @Inject()(cc: ControllerComponents, config: Configurati
     solr.query(new SolrQuery(s"id:${id.stringify}")).map {
       qr => qr.getResults()
     }
+  }
+
+  def addCase(`case`: Case): Future[UpdateResponse] = {
+    solr.addBean(Some("case"),`case`)
+    solr.commit(Some("case"))
+  }
+
+  def updateCase(id: BSONObjectID, `case`: Case): Future[UpdateResponse] = {
+    deleteCase(id).flatMap(_ => addCase(`case`))
+
+  }
+
+  def deleteCase(id: BSONObjectID): Future[UpdateResponse] = {
+    solr.deleteById(Some("case"), id.stringify)
   }
 }

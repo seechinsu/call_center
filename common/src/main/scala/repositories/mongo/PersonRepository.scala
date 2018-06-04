@@ -1,19 +1,18 @@
 package repositories.mongo
 
-import javax.inject.Inject
-import models.{Person}
-import play.api.libs.json.Json
-import play.modules.reactivemongo.ReactiveMongoApi
-import play.modules.reactivemongo.json._
+import models.Person
 import reactivemongo.api.commands.WriteResult
 import reactivemongo.api.{Cursor, ReadPreference}
 import reactivemongo.bson.{BSONDocument, BSONObjectID}
 import reactivemongo.play.json.collection.JSONCollection
+import play.api.libs.json.Json
+import play.modules.reactivemongo.ReactiveMongoApi
+import play.modules.reactivemongo.json._
+import javax.inject.Inject
 import reactivemongo.util.LazyLogger
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ExecutionContext, Future}
-
 
 class PersonRepository @Inject()(implicit ec: ExecutionContext, reactiveMongoApi: ReactiveMongoApi) {
 

@@ -13,16 +13,9 @@ object ContactInfo {
 }
 
 case class ContactInfoDetail(
-                              mobilePhones: Option[Seq[String]],
-                              homePhones: Option[Seq[String]],
-                              workPhones: Option[Seq[String]],
-                              generalEmails: Option[Seq[String]],
-                              generalPhones: Option[Seq[String]],
-                              directPhones: Option[Seq[String]],
-                              posterPhones: Option[Seq[String]],
-                              faxPhones: Option[Seq[String]],
-                              agencyEmails: Option[Seq[String]],
-                              officerEmails: Option[Seq[String]]
+                              phoneNumbers: Seq[PhoneNumber],
+                              emailAddresses: Seq[EmailsAddress],
+                              onlineHandles: Seq[OnlineHandle]
                             )
 
 object ContactInfoDetail {
@@ -31,3 +24,39 @@ object ContactInfoDetail {
   implicit val formats: OFormat[ContactInfoDetail] = Json.format[ContactInfoDetail]
 }
 
+case class PhoneNumber(
+                       phoneNumberDeviceType: String,
+                       phoneNumberType: String,
+                       phoneCountryCode: Int,
+                       phoneAreaCode: Int,
+                       phoneNumber: Int
+                       )
+
+object PhoneNumber {
+  import play.api.libs.json._
+
+  implicit val formats: OFormat[PhoneNumber] = Json.format[PhoneNumber]
+}
+
+case class EmailsAddress(
+                         emailAddressType: String,
+                         emailCompany: String,
+                         emailAddress: String
+                       )
+
+object EmailsAddress {
+  import play.api.libs.json._
+
+  implicit val formats: OFormat[EmailsAddress] = Json.format[EmailsAddress]
+}
+
+case class OnlineHandle(
+                          onlineHandle: String,
+                          company: String
+                        )
+
+object OnlineHandle {
+  import play.api.libs.json._
+
+  implicit val formats: OFormat[OnlineHandle] = Json.format[OnlineHandle]
+}

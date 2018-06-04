@@ -18,7 +18,6 @@ case class NarrativeInfo(
                           narrtiveCreateDateTime: Long = Instant.now().toEpochMilli,
                           narrativeType: String,
                           narrativeText: String
-                          //narrtiveUpdateDateTime:
                         )
 
 object NarrativeInfo {

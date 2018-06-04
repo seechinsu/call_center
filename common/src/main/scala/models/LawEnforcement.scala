@@ -4,7 +4,6 @@ import java.time.{LocalDate}
 import reactivemongo.bson.{BSONObjectID}
 import reactivemongo.play.json._
 
-
 case class LawEnforcement(_id: Option[BSONObjectID], lawEnforcementInfo: LawEnforcementInfo)
 
 object LawEnforcement {
@@ -25,13 +24,12 @@ case class LawEnforcementInfo(
                                ocaNumber: String,
                                oriNumber: String,
                                childIssuingAgency: String,
-                               contactInfo: Option[Seq[ContactInfo]],
-                               addressInfo: Option[Seq[Address]],
-                               notes: Option[Seq[Narrative]]
+                               contactInfo: Seq[ContactInfo],
+                               addressInfo: Seq[Address],
+                               notes: Seq[Narrative]
                              )
 
 object LawEnforcementInfo {
-
   import play.api.libs.json._
 
   implicit val formats: OFormat[LawEnforcementInfo] = Json.format[LawEnforcementInfo]

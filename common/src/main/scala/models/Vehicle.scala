@@ -35,7 +35,7 @@ case class VehicleInfo(
                         vehicleTagYear: String,
                         vehicleTagState: String,
                         vinNumber: String,
-                        notes: Option[Seq[Narrative]]
+                        notes: Seq[Narrative]
                       )
 
 object VehicleInfo {
