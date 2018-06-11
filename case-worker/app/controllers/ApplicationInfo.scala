@@ -2,14 +2,15 @@ package controllers
 
 import reactivemongo.bson.BSONObjectID
 import repositories.mongo.CaseRepository
-
 import akka.actor.ActorSystem
 import com.typesafe.scalalogging.LazyLogging
 import play.api.libs.json.Json
 import play.api.mvc.{Action, AnyContent, Controller}
-
 import java.net.InetAddress
+import call.center.worker.BuildInfo
+
 import javax.inject.Inject
+
 import scala.concurrent.ExecutionContext
 
 class ApplicationInfo @Inject()(
@@ -42,7 +43,7 @@ class ApplicationInfo @Inject()(
   def health: Action[AnyContent] = Action.async {
     val anyId = BSONObjectID.generate()
     val future = caseRepo.getCase(anyId)
-    val result = future.map(_ => Ok("OK")).recover{case exception: Exception => ServiceUnavailable(exception)}
+    val result = future.map(_ => Ok("OK")).recover{case exception: Exception => ServiceUnavailable(exception.toString)}
     result
   }
 
