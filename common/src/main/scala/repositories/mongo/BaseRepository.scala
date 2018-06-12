@@ -8,14 +8,17 @@ import reactivemongo.play.json.collection.JSONCollection
 import play.api.libs.json.{Json, OFormat}
 import play.modules.reactivemongo.ReactiveMongoApi
 import play.modules.reactivemongo.json._
+import play.api.libs.json.{Json, OFormat}
+import play.modules.reactivemongo.ReactiveMongoApi
+import play.modules.reactivemongo.json._
+
+import scala.reflect.Manifest
 import reactivemongo.util.LazyLogger
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ExecutionContext, Future}
 
-
-abstract class BaseRepository[T <: Product : Manifest : OFormat](ec: ExecutionContext, reactiveMongoApi: ReactiveMongoApi, name: String) {
-  
+abstract class BaseRepository[T <: Product : Manifest : OFormat](name: String)(implicit ec: ExecutionContext, reactiveMongoApi: ReactiveMongoApi) {
   val logger = LazyLogger.apply(this.getClass.getName)
 
   val collection: Future[JSONCollection] = reactiveMongoApi.database.map{
@@ -51,7 +54,6 @@ abstract class BaseRepository[T <: Product : Manifest : OFormat](ec: ExecutionCo
     manifest.runtimeClass.getDeclaredFields.map(_.getName)
     for(values <- source.productIterator)
       values
-      
     source
   }
 

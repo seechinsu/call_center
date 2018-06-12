@@ -20,7 +20,7 @@ class NarrativeController @Inject()(cc: ControllerComponents, narrativeRepo: Nar
     responseContainer = "List"
   )
   def getAllNarratives = Action.async {
-    narrativeRepo.getAll.map { narrative =>
+    narrativeRepo.getAllTs.map { narrative =>
       Ok(Json.toJson(narrative))
     }
   }
@@ -47,7 +47,7 @@ class NarrativeController @Inject()(cc: ControllerComponents, narrativeRepo: Nar
   )
   def createNarrative() = Action.async(parse.json) { req =>
     req.body.validate[Narrative].map { narrativeData =>
-      narrativeRepo.addNarrative(narrativeData).map { _ =>
+      narrativeRepo.addT(narrativeData).map { _ =>
         Created
       }
     }.getOrElse(Future.successful(BadRequest("Invalid Narrative format")))
@@ -58,7 +58,7 @@ class NarrativeController @Inject()(cc: ControllerComponents, narrativeRepo: Nar
     response = classOf[Narrative]
   )
   def deleteNarrative(@ApiParam(value = "The id of the narrative to delete") narrativeId: BSONObjectID) = Action.async{ req =>
-    narrativeRepo.deleteNarrative(narrativeId).map {
+    narrativeRepo.deleteT(narrativeId).map {
       case Some(narrative) => Ok(Json.toJson(narrative))
       case None => NotFound
     }
@@ -69,7 +69,7 @@ class NarrativeController @Inject()(cc: ControllerComponents, narrativeRepo: Nar
     response = classOf[Narrative]
   )
   def getNarrative(@ApiParam(value = "The id of the narrative to retrieve") narrativeId: BSONObjectID) = Action.async{ req =>
-    narrativeRepo.getNarrative(narrativeId).map { maybeNarrative =>
+    narrativeRepo.getT(narrativeId).map { maybeNarrative =>
       maybeNarrative.map { narrative =>
         Ok(Json.toJson(narrative))
       }.getOrElse(NotFound)

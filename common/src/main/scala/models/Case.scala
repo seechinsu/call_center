@@ -1,7 +1,7 @@
 package models
 
 import java.time.Instant
-import reactivemongo.bson.{BSONObjectID}
+import reactivemongo.bson.BSONObjectID
 import reactivemongo.play.json._
 
 
@@ -33,7 +33,6 @@ case class PrimaryCaseInfo(
                             vehicle: Seq[Vehicle],
                             narrative: Seq[Narrative],
                             people: Seq[Person]
-
 )
 
 object PrimaryCaseInfo {

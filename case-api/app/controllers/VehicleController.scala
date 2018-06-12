@@ -21,7 +21,7 @@ class VehicleController @Inject()(cc: ControllerComponents, vehicleRepo: Vehicle
     responseContainer = "List"
   )
   def getAllVehicles = Action.async {
-    vehicleRepo.getAll.map { vehicle =>
+    vehicleRepo.getAllTs.map { vehicle =>
       Ok(Json.toJson(vehicle))
     }
   }
@@ -48,7 +48,7 @@ class VehicleController @Inject()(cc: ControllerComponents, vehicleRepo: Vehicle
   )
   def createVehicle() = Action.async(parse.json) { req =>
     req.body.validate[Vehicle].map { vehicleData =>
-      vehicleRepo.addVehicle(vehicleData).map { _ =>
+      vehicleRepo.addT(vehicleData).map { _ =>
         Created
       }
     }.getOrElse(Future.successful(BadRequest("Invalid Vehicle format")))
@@ -59,7 +59,7 @@ class VehicleController @Inject()(cc: ControllerComponents, vehicleRepo: Vehicle
     response = classOf[Vehicle]
   )
   def deleteVehicle(@ApiParam(value = "The id of the vehicle to delete") vehicleId: BSONObjectID) = Action.async{ req =>
-    vehicleRepo.deleteVehicle(vehicleId).map {
+    vehicleRepo.deleteT(vehicleId).map {
       case Some(vehicle) => Ok(Json.toJson(vehicle))
       case None => NotFound
     }
@@ -70,7 +70,7 @@ class VehicleController @Inject()(cc: ControllerComponents, vehicleRepo: Vehicle
     response = classOf[Vehicle]
   )
   def getVehicle(@ApiParam(value = "The id of the vehicle to retrieve") vehicleId: BSONObjectID) = Action.async{ req =>
-    vehicleRepo.getVehicle(vehicleId).map { maybeVehicle =>
+    vehicleRepo.getT(vehicleId).map { maybeVehicle =>
       maybeVehicle.map { vehicle =>
         Ok(Json.toJson(vehicle))
       }.getOrElse(NotFound)

@@ -21,7 +21,7 @@ class LeadController @Inject()(cc: ControllerComponents, leadRepo: LeadRepositor
     responseContainer = "List"
   )
   def getAllLeads = Action.async {
-    leadRepo.getAllLeads.map { cases =>
+    leadRepo.getAllTs.map { cases =>
       Ok(Json.toJson(cases))
     }
   }
@@ -51,7 +51,7 @@ class LeadController @Inject()(cc: ControllerComponents, leadRepo: LeadRepositor
 //      for { _ <- caseRepo.addLead(leadData)
 //            _ <- producer.publish(EventWrapper.apply("lead-added", serialize.serialize(leadData)))
 //      } yield Created
-      leadRepo.addLead(leadData).map { _ =>
+      leadRepo.addT(leadData).map { _ =>
         Created
       }
     }.getOrElse(Future.successful(BadRequest("Invalid Lead format")))
@@ -62,7 +62,7 @@ class LeadController @Inject()(cc: ControllerComponents, leadRepo: LeadRepositor
     response = classOf[Lead]
   )
   def deleteLead(@ApiParam(value = "The id of the lead to delete") leadId: BSONObjectID) = Action.async{ req =>
-    leadRepo.deleteLead(leadId).map {
+    leadRepo.deleteT(leadId).map {
       case Some(leadid) => Ok(Json.toJson(leadid))
       case None => NotFound
     }
@@ -73,7 +73,7 @@ class LeadController @Inject()(cc: ControllerComponents, leadRepo: LeadRepositor
     response = classOf[Lead]
   )
   def getLead(@ApiParam(value = "The id of the case to retrieve") leadId: BSONObjectID) = Action.async{ req =>
-    leadRepo.getLead(leadId).map { maybeLead =>
+    leadRepo.getT(leadId).map { maybeLead =>
       maybeLead.map { lead =>
         Ok(Json.toJson(lead))
       }.getOrElse(NotFound)
