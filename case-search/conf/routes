@@ -4,6 +4,7 @@
 
 GET       /search                     controllers.CaseSearchController.getAll
 GET       /search/:keyword            controllers.CaseSearchController.searchKeyword(keyword: String)
+GET       /search/:id                 controllers.CaseSearchController.searchId(id: String)
 
 # Swagger docs
 GET       /                           controllers.ApiDocsController.redirectToDocs

@@ -20,7 +20,7 @@ class AddressController @Inject()(cc: ControllerComponents, addressRepo: Address
     responseContainer = "List"
   )
   def getAllAddresses = Action.async {
-    addressRepo.getAllAddresses.map { address =>
+    addressRepo.getAllTs.map { address =>
       Ok(Json.toJson(address))
     }
   }
@@ -47,7 +47,7 @@ class AddressController @Inject()(cc: ControllerComponents, addressRepo: Address
   )
   def createAddress() = Action.async(parse.json) { req =>
     req.body.validate[Address].map { addressData =>
-      addressRepo.addAddress(addressData).map { _ =>
+      addressRepo.addT(addressData).map { _ =>
         Created
       }
     }.getOrElse(Future.successful(BadRequest("Invalid address format")))
@@ -58,7 +58,7 @@ class AddressController @Inject()(cc: ControllerComponents, addressRepo: Address
     response = classOf[Address]
   )
   def deleteAddress(@ApiParam(value = "The id of the address to delete") addressId: BSONObjectID) = Action.async{ req =>
-    addressRepo.deleteAddress(addressId).map {
+    addressRepo.deleteT(addressId).map {
       case Some(address) => Ok(Json.toJson(address))
       case None => NotFound
     }
@@ -69,7 +69,7 @@ class AddressController @Inject()(cc: ControllerComponents, addressRepo: Address
     response = classOf[Address]
   )
   def getAddress(@ApiParam(value = "The id of the address to retrieve") addressId: BSONObjectID) = Action.async{ req =>
-    addressRepo.getAddress(addressId).map { maybeAddress =>
+    addressRepo.getT(addressId).map { maybeAddress =>
       maybeAddress.map { address =>
         Ok(Json.toJson(address))
       }.getOrElse(NotFound)

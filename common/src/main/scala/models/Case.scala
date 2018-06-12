@@ -1,7 +1,7 @@
 package models
 
 import java.time.Instant
-import reactivemongo.bson.{BSONObjectID}
+import reactivemongo.bson.BSONObjectID
 import reactivemongo.play.json._
 
 
@@ -14,25 +14,25 @@ object Case {
 }
 
 case class PrimaryCaseInfo(
-                            _id: Option[BSONObjectID],
-                            caseType: String,
+                            caseType: Option[Seq[String]],
                             requestType: String,
                             operator: String,
-                            dateOfCall: Long = Instant.now().toEpochMilli,
-                            aniNumber: String,
-                            outOfRange: Boolean,
+                            dateOfIntake: Long = Instant.now().toEpochMilli,
+                            aniNumber: Option[String],
+                            outOfRange: Option[Boolean],
                             source: String,
-                            referredBy: String,
-                            relatedCases: Int,
-                            events: String,
+                            referredBy: Option[String],
+                            relatedCases: Option[Int],
+                            events: Option[String],
                             amberAlertFlag: Boolean,
-                            sourceOrganization: String,
+                            sourceOrganization: Option[String],
                             referredToAmeco: Boolean,
-                            amecoNpo: String
-                            //lawEnforcementInfo: Seq[LawEnforcement],
-                            //vehicle: Seq[Vehicle],
-                            //narrative: Seq[Narrative],
-                            //people: Seq[Person]
+                            amecoNpo: Option[String],
+                            leads: Seq[String],
+                            lawEnforcementInfo: Seq[LawEnforcement],
+                            vehicle: Seq[Vehicle],
+                            narrative: Seq[Narrative],
+                            people: Seq[Person]
 )
 
 object PrimaryCaseInfo {

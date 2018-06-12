@@ -13,15 +13,15 @@ object Address {
 }
 
 case class AddressInfo(
-                            addressDescription: String,
-                            addressType: String,
-                            streetAddress: String,
-                            city: String,
-                            zip: String,
-                            county: String,
-                            state: String,
-                            country: String
-)
+                        addressDescription: String,
+                        addressType: Seq[String],
+                        streetAddress: String,
+                        city: String,
+                        zip: String,
+                        county: String,
+                        state: String,
+                        country: String
+                      )
 
 object AddressInfo {
   import play.api.libs.json._

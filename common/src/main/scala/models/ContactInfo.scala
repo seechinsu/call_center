@@ -13,11 +13,9 @@ object ContactInfo {
 }
 
 case class ContactInfoDetail(
-                              _id: Option[BSONObjectID]
-                              //mobilePhones: Seq[String],
-                              //homePhones: Seq[String],
-                              //workPhones: Seq[String],
-                              //emails: Seq[String]
+                              phoneNumbers: Seq[PhoneNumber],
+                              emailAddresses: Seq[EmailsAddress],
+                              onlineHandles: Seq[OnlineHandle]
                             )
 
 object ContactInfoDetail {
@@ -26,3 +24,39 @@ object ContactInfoDetail {
   implicit val formats: OFormat[ContactInfoDetail] = Json.format[ContactInfoDetail]
 }
 
+case class PhoneNumber(
+                       phoneNumberDeviceType: String,
+                       phoneNumberType: String,
+                       phoneCountryCode: Int,
+                       phoneAreaCode: Int,
+                       phoneNumber: Int
+                       )
+
+object PhoneNumber {
+  import play.api.libs.json._
+
+  implicit val formats: OFormat[PhoneNumber] = Json.format[PhoneNumber]
+}
+
+case class EmailsAddress(
+                         emailAddressType: String,
+                         emailCompany: String,
+                         emailAddress: String
+                       )
+
+object EmailsAddress {
+  import play.api.libs.json._
+
+  implicit val formats: OFormat[EmailsAddress] = Json.format[EmailsAddress]
+}
+
+case class OnlineHandle(
+                          onlineHandle: String,
+                          company: String
+                        )
+
+object OnlineHandle {
+  import play.api.libs.json._
+
+  implicit val formats: OFormat[OnlineHandle] = Json.format[OnlineHandle]
+}

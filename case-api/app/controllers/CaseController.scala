@@ -4,7 +4,7 @@ import client.{EventWrapper, KafkaProducerClient}
 import io.swagger.annotations._
 import javax.inject.Inject
 import models.Case
-import repositories.mongo.CaseRepository
+import repositories.mongo.{CaseRepository}
 import reactivemongo.bson.BSONObjectID
 import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, ControllerComponents}
@@ -21,7 +21,7 @@ class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepositor
     responseContainer = "List"
   )
   def getAllCases = Action.async {
-    caseRepo.getAllCases.map { cases =>
+    caseRepo.getAllTs.map { cases =>
       Ok(Json.toJson(cases))
     }
   }
@@ -48,9 +48,12 @@ class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepositor
   )
   def createCase() = Action.async(parse.json) { req =>
     req.body.validate[Case].map { caseData =>
-      for { _ <- caseRepo.addCase(caseData)
-            _ <- producer.publish(EventWrapper.apply("case-added", serialize.serialize(caseData)))
-      } yield Created
+//      for { _ <- caseRepo.addCase(caseData)
+//            _ <- producer.publish(EventWrapper.apply("case-added", serialize.serialize(caseData)))
+//      } yield Created
+      caseRepo.addT(caseData).map { _ =>
+        Created
+      }
     }.getOrElse(Future.successful(BadRequest("Invalid Case format")))
   }
 
@@ -59,7 +62,7 @@ class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepositor
     response = classOf[Case]
   )
   def deleteCase(@ApiParam(value = "The id of the case to delete") caseId: BSONObjectID) = Action.async{ req =>
-    caseRepo.deleteCase(caseId).map {
+    caseRepo.deleteT(caseId).map {
       case Some(caseid) => Ok(Json.toJson(caseid))
       case None => NotFound
     }
@@ -70,7 +73,7 @@ class CaseController @Inject()(cc: ControllerComponents, caseRepo: CaseRepositor
     response = classOf[Case]
   )
   def getCase(@ApiParam(value = "The id of the case to retrieve") caseId: BSONObjectID) = Action.async{ req =>
-    caseRepo.getCase(caseId).map { maybeCase =>
+    caseRepo.getT(caseId).map { maybeCase =>
       maybeCase.map { `case` =>
         Ok(Json.toJson(`case`))
       }.getOrElse(NotFound)

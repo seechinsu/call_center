@@ -1,13 +1,13 @@
 package controllers
 
-import javax.inject.Inject
-import io.swagger.annotations._
-import models.{Person}
-import repositories.mongo.{PersonRepository}
 
+import io.swagger.annotations._
+import javax.inject.Inject
+import models.Person
+import repositories.mongo.PersonRepository
+import reactivemongo.bson.BSONObjectID
 import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, ControllerComponents}
-import reactivemongo.bson.BSONObjectID
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -21,7 +21,7 @@ class PersonController @Inject()(cc: ControllerComponents, personRepo: PersonRep
     responseContainer = "List"
   )
   def getAllPeople = Action.async {
-    personRepo.getAll.map { people =>
+    personRepo.getAllTs.map { people =>
       Ok(Json.toJson(people))
     }
   }
@@ -49,7 +49,7 @@ class PersonController @Inject()(cc: ControllerComponents, personRepo: PersonRep
   )
   def createPerson() = Action.async(parse.json) { req =>
     req.body.validate[Person].map { personData =>
-      personRepo.addPerson(personData).map { _ =>
+      personRepo.addT(personData).map { _ =>
         Created
       }
     }.getOrElse(Future.successful(BadRequest("Invalid Person format")))
@@ -60,7 +60,7 @@ class PersonController @Inject()(cc: ControllerComponents, personRepo: PersonRep
     response = classOf[Person]
   )
   def deletePerson(@ApiParam(value = "The id of the person to delete") personId: BSONObjectID) = Action.async{ req =>
-    personRepo.deletePerson(personId).map {
+    personRepo.deleteT(personId).map {
       case Some(person) => Ok(Json.toJson(person))
       case None => NotFound
     }
@@ -71,7 +71,7 @@ class PersonController @Inject()(cc: ControllerComponents, personRepo: PersonRep
     response = classOf[Person]
   )
   def getPerson(@ApiParam(value = "The id of the person to retrieve") personId: BSONObjectID) = Action.async{ req =>
-    personRepo.getPerson(personId).map { maybePerson =>
+    personRepo.getT(personId).map { maybePerson =>
       maybePerson.map { person =>
         Ok(Json.toJson(person))
       }.getOrElse(NotFound)

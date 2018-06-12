@@ -20,7 +20,7 @@ class ContactInfoController @Inject()(cc: ControllerComponents, contactInfoRepo:
     responseContainer = "List"
   )
   def getAllContactInfo = Action.async {
-    contactInfoRepo.getAllContactInfo.map { contact =>
+    contactInfoRepo.getAllTs.map { contact =>
       Ok(Json.toJson(contact))
     }
   }
@@ -47,7 +47,7 @@ class ContactInfoController @Inject()(cc: ControllerComponents, contactInfoRepo:
   )
   def createContactInfo() = Action.async(parse.json) { req =>
     req.body.validate[ContactInfo].map { contactData =>
-      contactInfoRepo.addContactInfo(contactData).map { _ =>
+      contactInfoRepo.addT(contactData).map { _ =>
         Created
       }
     }.getOrElse(Future.successful(BadRequest("Invalid contact info format")))
@@ -58,7 +58,7 @@ class ContactInfoController @Inject()(cc: ControllerComponents, contactInfoRepo:
     response = classOf[ContactInfo]
   )
   def deleteContactInfo(@ApiParam(value = "The id of the contact info to delete") contactId: BSONObjectID) = Action.async{ req =>
-    contactInfoRepo.deleteContactInfo(contactId).map {
+    contactInfoRepo.deleteT(contactId).map {
       case Some(contact) => Ok(Json.toJson(contact))
       case None => NotFound
     }
@@ -69,7 +69,7 @@ class ContactInfoController @Inject()(cc: ControllerComponents, contactInfoRepo:
     response = classOf[ContactInfo]
   )
   def getContactInfo(@ApiParam(value = "The id of the contact info to retrieve") contactId: BSONObjectID) = Action.async{ req =>
-    contactInfoRepo.getAllContactInfo.map { contact =>
+    contactInfoRepo.getT(contactId).map { contact =>
       Ok(Json.toJson(contact))
     }
   }
