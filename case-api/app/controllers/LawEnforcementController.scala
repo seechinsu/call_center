@@ -21,7 +21,7 @@ class LawEnforcementController @Inject()(cc: ControllerComponents, leaRepo: LawE
     responseContainer = "List"
   )
   def getAllLea = Action.async {
-    leaRepo.getAll.map { lea =>
+    leaRepo.getAllTs.map { lea =>
       Ok(Json.toJson(lea))
     }
   }
@@ -49,7 +49,7 @@ class LawEnforcementController @Inject()(cc: ControllerComponents, leaRepo: LawE
   )
   def createLawEnforcement() = Action.async(parse.json) { req =>
     req.body.validate[LawEnforcement].map { leaData =>
-      leaRepo.addLawEnforcement(leaData).map { _ =>
+      leaRepo.addT(leaData).map { _ =>
         Created
       }
     }.getOrElse(Future.successful(BadRequest("Invalid LawEnforcement format")))
@@ -60,7 +60,7 @@ class LawEnforcementController @Inject()(cc: ControllerComponents, leaRepo: LawE
     response = classOf[LawEnforcement]
   )
   def deleteLawEnforcement(@ApiParam(value = "The id of the law enforcement agent to delete") leaId: BSONObjectID) = Action.async{ req =>
-    leaRepo.deleteLawEnforcement(leaId).map {
+    leaRepo.deleteT(leaId).map {
       case Some(lea) => Ok(Json.toJson(lea))
       case None => NotFound
     }
@@ -71,7 +71,7 @@ class LawEnforcementController @Inject()(cc: ControllerComponents, leaRepo: LawE
     response = classOf[LawEnforcement]
   )
   def getLawEnforcement(@ApiParam(value = "The id of the lea to retrieve") leaId: BSONObjectID) = Action.async{ req =>
-    leaRepo.getLawEnforcement(leaId).map { maybeLawEnforcement =>
+    leaRepo.getT(leaId).map { maybeLawEnforcement =>
       maybeLawEnforcement.map { lea =>
         Ok(Json.toJson(lea))
       }.getOrElse(NotFound)

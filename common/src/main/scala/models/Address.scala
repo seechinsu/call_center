@@ -14,7 +14,7 @@ object Address {
 
 case class AddressInfo(
                         addressDescription: String,
-                        addressType: Option[Seq[String]],
+                        addressType: Seq[String],
                         streetAddress: String,
                         city: String,
                         zip: String,
