@@ -9,19 +9,16 @@ import org.apache.solr.client.solrj.SolrQuery
 import org.apache.solr.client.solrj.response.UpdateResponse
 import org.apache.solr.common.SolrDocumentList
 import play.api.Configuration
-import play.api.mvc.{AbstractController, ControllerComponents}
-
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 
-class SolrBaseRepository[T <: Object] @Inject()(cc: ControllerComponents, config: Configuration, name: String) extends AbstractController(cc) {
+class SolrBaseRepository[T <: Object] @Inject()(name: String)(implicit config: Configuration) {
 
-  //val solr = AsyncSolrClient("http://localhost:8983/solr/news")
-  val solr = AsyncSolrClient(s"${config.underlying.getString("solrEndpoint")}/case")
+  val solr = AsyncSolrClient(s"${config.underlying.getString("solrEndpoint")}/${name}")
 
-  def getAll: Future[SolrDocumentList] = {
+  def getAllT: Future[SolrDocumentList] = {
     solr.query(new SolrQuery("*:*").setParam("wt","json")).map {
       qr => qr.getResults()
     }

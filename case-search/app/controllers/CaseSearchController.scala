@@ -8,14 +8,14 @@ import play.api.mvc.{AbstractController, ControllerComponents}
 import scala.concurrent.ExecutionContext.Implicits.global
 
 
-@Api(value = "/search")
+@Api(value = "/case-search")
 class CaseSearchController @Inject()(cc: ControllerComponents, caseSearchRepo: SolrCaseRepository) extends AbstractController(cc) {
 
   @ApiOperation(
     value = "Returns raw solr json response for *:*"
   )
   def getAll = Action.async {
-    caseSearchRepo.getAll.map { items =>
+    caseSearchRepo.getAllT.map { items =>
       Ok(Json.toJson(items.toString))
     }
   }
@@ -37,4 +37,5 @@ class CaseSearchController @Inject()(cc: ControllerComponents, caseSearchRepo: S
       Ok(Json.toJson(items.toString))
     }
   }
+
 }

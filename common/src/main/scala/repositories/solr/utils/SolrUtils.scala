@@ -23,7 +23,7 @@ import scala.util.control.Breaks._
 
 
 object SolrUtils {
-  val logger = Logger
+  //val logger = Logger
 
   def autoMapToSolrInputDoc(
     docId: String,
@@ -54,9 +54,9 @@ object SolrUtils {
             var value: Option[Object] = None
             try {
               value = Some(f.get(obj))
-            } catch {
-              case e: IllegalAccessException => logger.error("Exception during reflection ", e)
-            }
+            } //catch {
+              //case e: IllegalAccessException => logger.error("Exception during reflection ", e)
+            //}
 
             if (value.isDefined) {
               val fieldName = f.getName
@@ -75,9 +75,9 @@ object SolrUtils {
     try {
       val info = Introspector.getBeanInfo(objClass)
       props = Some(info.getPropertyDescriptors)
-    } catch {
-      case e: IntrospectionException => logger.warn("Can't get BeanInfo for class: " + objClass)
-    }
+    } //catch {
+      //case e: IntrospectionException => logger.warn("Can't get BeanInfo for class: " + objClass)
+    //}
 
     if (props.isDefined) {
       for (pd <- props.get) {
@@ -91,10 +91,10 @@ object SolrUtils {
               var value: Option[Object] = None
               try {
                 value = Some(readMethod.invoke(obj))
-              } catch {
-                case e: Exception => logger.warn("failed to invoke read method for property '" + pd.getName + "' on " +
-                  "object of type '" + objClass.getName + "' due to: " + e)
-              }
+              } //catch {
+//                case e: Exception => logger.warn("failed to invoke read method for property '" + pd.getName + "' on " +
+//                  "object of type '" + objClass.getName + "' due to: " + e)
+              //}
 
               if (value.isDefined) {
                 fields.add(propName)
@@ -155,7 +155,7 @@ object SolrUtils {
     else if ((classOf[java.lang.Float] == clazz) || (classOf[Float] == clazz)) return Some("_f")
     else if ((classOf[java.lang.Boolean] == clazz) || (classOf[Boolean] == clazz)) return Some("_b")
     else if (classOf[Date] == clazz) return Some("_tdt")
-    logger.debug("failed to map class '" + clazz + "' to a known dynamic type")
+    //logger.debug("failed to map class '" + clazz + "' to a known dynamic type")
     None
   }
 }

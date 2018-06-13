@@ -2,9 +2,9 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET       /search                     controllers.CaseSearchController.getAll
-GET       /search/:keyword            controllers.CaseSearchController.searchKeyword(keyword: String)
-GET       /search/:id                 controllers.CaseSearchController.searchId(id: String)
+GET       /case-search                     controllers.CaseSearchController.getAll
+GET       /case-search/:keyword            controllers.CaseSearchController.searchKeyword(keyword: String)
+GET       /case-search/:id                 controllers.CaseSearchController.searchId(id: String)
 
 # Swagger docs
 GET       /                           controllers.ApiDocsController.redirectToDocs

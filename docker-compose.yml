@@ -19,7 +19,6 @@ services:
       - "-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044"
     networks:
       - solr
-
   solr2:
     image: solr
     container_name: solr2
@@ -39,7 +38,6 @@ services:
       - "-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044"
     networks:
       - solr
-
   solr3:
     image: solr
     container_name: solr3
@@ -61,7 +59,6 @@ services:
       - 8983:8983
     networks:
       - solr
-
   zoo1:
     image: zookeeper
     container_name: zoo1
@@ -74,7 +71,6 @@ services:
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
     networks:
       - solr
-
   zoo2:
     image: zookeeper
     container_name: zoo2
@@ -87,7 +83,6 @@ services:
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
     networks:
       - solr
-
   zoo3:
     image: zookeeper
     container_name: zoo3
@@ -101,96 +96,96 @@ services:
     networks:
       - solr
 
-  case-api:
-      image: call.center/case_api:latest
-      ports:
-        - "9000:9001"
-      environment:
-        - APPLICATION_SECRET=kGb;WxcjXWvzokicH;Qn_9h54q:5v]>38Wg:Q:dwn0<dPWfDKarEi4btAwxtj>wq
-        - MONGO_URI=mongodb://mongo.local:27017/dbname?authMode=scram-sha1
-        - MONGO_USERNAME=mongo
-        - MONGO_PASSWORD=dbpass
-        - KAFKA_BROKERS=kafka.local:9092
-      links:
-        - kafka:kafka.local
-        - mongo:mongo.local
-    mongodata:
-      image: mongo:3.0.4
-      volumes:
-        - /data/db
-      command: --break-mongo
-    mongo:
-      image: mongo:3.0.4
-      volumes_from:
-        - mongodata
-      ports:
-        - "27017:27017"
-      command: --smallfiles --rest
-      environment:
-        - MONGODB_USER=mongo
-        - MONGODB_DATABASE=dbname
-        - MONGODB_PASS=dbpass
-    zookeeper:
-      image: wurstmeister/zookeeper:3.4.6
-    kafka:
-      image: ches/kafka:0.10.1.0
-      links:
-        - zookeeper
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-    kafkacat:
-      image: ryane/kafkacat
-      entrypoint:
-        - kafkacat
-        - -b kafka.local
-      links:
-        - kafka:kafka.local
-  case_etl:
-    ports:
-       - 9000:9000
-       - 9010:9010
-    image: call.center/case_etl:latest
-    environment:
-      - SBT_OPTS=-Dsbt.log.noformat=true
-      - JAVA_OPTS=-Xmx300m -Xms300m -Dnewrelic.config.agent_enabled=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.rmi.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=0.0.0.0 -Dcom.sun.management.jmxremote.host=0.0.0.0
-      - APPLICATION_SECRET=abcdefgh
-      - PRESTO_URL=jdbc:presto://presto.local:8080/hive
-      - PRESTO_LOGSQL=true
-    links:
-      - presto:presto.local
-  hive:
-    build:
-      context: ./hive
-      dockerfile: Dockerfile
-    command: /bin/bash -c 'cd /usr/local/hive && ./bin/hive -f /user/hive/warehouse/init.sql && ./bin/hive --service metastore'
-    volumes:
-      - ./presto/data:/user/hive/warehouse
-    ports:
-      - 9083:9083
-  presto:
-    image: jimexist/simple-hive-presto
-    hostname: presto
-    ports:
-      - 8080:8080
-    volumes:
-      - ./presto/catalog:/opt/presto/presto-server-0.166/etc/catalog
-      - ./presto/data:/user/hive/warehouse
-    links:
-      - hive:hive.local
-  mysql:
-    image: mysql:latest
-    volumes:
-      - ./mysql/initdb/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
-      - ./mysql/initdb/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
-    expose:
-      - "3306"
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_DATABASE=datawarehouse
-      - MYSQL_USER=master
-      - MYSQL_PASSWORD=YJZwBA6wYygtk9vb
-      - MYSQL_ROOT_PASSWORD=admin123
+#  case-api:
+#      image: call.center/case_api:latest
+#      ports:
+#        - "9000:9001"
+#      environment:
+#        - APPLICATION_SECRET=kGb;WxcjXWvzokicH;Qn_9h54q:5v]>38Wg:Q:dwn0<dPWfDKarEi4btAwxtj>wq
+#        - MONGO_URI=mongodb://mongo.local:27017/dbname?authMode=scram-sha1
+#        - MONGO_USERNAME=mongo
+#        - MONGO_PASSWORD=dbpass
+#        - KAFKA_BROKERS=kafka.local:9092
+#      links:
+#        - kafka:kafka.local
+#        - mongo:mongo.local
+#    mongodata:
+#      image: mongo:3.0.4
+#      volumes:
+#        - /data/db
+#      command: --break-mongo
+#    mongo:
+#      image: mongo:3.0.4
+#      volumes_from:
+#        - mongodata
+#      ports:
+#        - "27017:27017"
+#      command: --smallfiles --rest
+#      environment:
+#        - MONGODB_USER=mongo
+#        - MONGODB_DATABASE=dbname
+#        - MONGODB_PASS=dbpass
+#    zookeeper:
+#      image: wurstmeister/zookeeper:3.4.6
+#    kafka:
+#      image: ches/kafka:0.10.1.0
+#      links:
+#        - zookeeper
+#      volumes:
+#        - /var/run/docker.sock:/var/run/docker.sock
+#    kafkacat:
+#      image: ryane/kafkacat
+#      entrypoint:
+#        - kafkacat
+#        - -b kafka.local
+#      links:
+#        - kafka:kafka.local
+#  case_etl:
+#    ports:
+#       - 9000:9000
+#       - 9010:9010
+#    image: call.center/case_etl:latest
+#    environment:
+#      - SBT_OPTS=-Dsbt.log.noformat=true
+#      - JAVA_OPTS=-Xmx300m -Xms300m -Dnewrelic.config.agent_enabled=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.rmi.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=0.0.0.0 -Dcom.sun.management.jmxremote.host=0.0.0.0
+#      - APPLICATION_SECRET=abcdefgh
+#      - PRESTO_URL=jdbc:presto://presto.local:8080/hive
+#      - PRESTO_LOGSQL=true
+#    links:
+#      - presto:presto.local
+#  hive:
+#    build:
+#      context: ./hive
+#      dockerfile: Dockerfile
+#    command: /bin/bash -c 'cd /usr/local/hive && ./bin/hive -f /user/hive/warehouse/init.sql && ./bin/hive --service metastore'
+#    volumes:
+#      - ./presto/data:/user/hive/warehouse
+#    ports:
+#      - 9083:9083
+#  presto:
+#    image: jimexist/simple-hive-presto
+#    hostname: presto
+#    ports:
+#      - 8080:8080
+#    volumes:
+#      - ./presto/catalog:/opt/presto/presto-server-0.166/etc/catalog
+#      - ./presto/data:/user/hive/warehouse
+#    links:
+#      - hive:hive.local
+#  mysql:
+#    image: mysql:latest
+#    volumes:
+#      - ./mysql/initdb/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+#      - ./mysql/initdb/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+#    expose:
+#      - "3306"
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      - MYSQL_DATABASE=datawarehouse
+#      - MYSQL_USER=master
+#      - MYSQL_PASSWORD=YJZwBA6wYygtk9vb
+#      - MYSQL_ROOT_PASSWORD=admin123
 
 networks:
   solr:
