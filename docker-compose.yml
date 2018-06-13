@@ -19,7 +19,6 @@ services:
       - "-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044"
     networks:
       - solr
-
   solr2:
     image: solr
     container_name: solr2
@@ -39,7 +38,6 @@ services:
       - "-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044"
     networks:
       - solr
-
   solr3:
     image: solr
     container_name: solr3
@@ -61,7 +59,6 @@ services:
       - 8983:8983
     networks:
       - solr
-
   zoo1:
     image: zookeeper
     container_name: zoo1
@@ -74,7 +71,6 @@ services:
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
     networks:
       - solr
-
   zoo2:
     image: zookeeper
     container_name: zoo2
@@ -87,7 +83,6 @@ services:
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
     networks:
       - solr
-
   zoo3:
     image: zookeeper
     container_name: zoo3
@@ -100,7 +95,7 @@ services:
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
     networks:
       - solr
-
+      
   case-api:
       image: call.center/case_api:latest
       ports:
