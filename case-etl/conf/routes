@@ -1,9 +1,0 @@
-# Routes
-# This file defines all application routes (Higher priority routes first)
-# ~~~~
-
-# Health
-GET  /         controllers.Health.index()
-GET  /ping     controllers.Health.ping()
-GET  /info     controllers.Health.info()
-GET  /health   controllers.Health.health()

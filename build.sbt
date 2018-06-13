@@ -101,36 +101,8 @@ lazy val case_worker = (project in file("case-worker")).
   ).
   enablePlugins(PlayScala, BuildInfoPlugin,DockerPlugin)
 
-lazy val case_etl = (project in file("case-etl")).
-  dependsOn(common, kafka).
-  settings(Common.settings: _*).
-  settings(libraryDependencies ++= Dependencies.crudDependencies).
-  settings(libraryDependencies ++= Dependencies.etlDependencies).
-  settings(libraryDependencies ++= Seq(
-    ws,
-    javaWs,
-    jdbc,
-    evolutions,
-    specs2 % Test)).
-  enablePlugins(PlayScala, BuildInfoPlugin)
-
-lazy val case_report = (project in file("case-report")).
-  dependsOn(common, kafka).
-  settings(Common.settings: _*).
-  settings(routesImport += "play.modules.reactivemongo.PathBindables._").
-  settings(libraryDependencies ++= Dependencies.etlDependencies).
-  settings(libraryDependencies ++= Dependencies.crudDependencies).
-  settings(libraryDependencies ++= Seq(
-    guice,
-    ws,
-    jdbc,
-    evolutions,
-    javaWs,
-    specs2 % Test)).
-  enablePlugins(PlayScala)
-
 lazy val root = (project in file(".")).
-  aggregate(case_api, case_search, case_worker, case_etl)
+  aggregate(case_api, case_search, case_worker)
   .settings(
       run := {
           (run in case_search in Compile).evaluated
