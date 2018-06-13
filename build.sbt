@@ -20,6 +20,8 @@ lazy val kafka = (project in file("kafka")).
   settings(libraryDependencies ++= Seq(
     guice))
 
+
+
 lazy val case_api = (project in file("case-api")).
   dependsOn(common, kafka).
   settings(Common.settings: _*).
