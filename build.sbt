@@ -111,6 +111,6 @@ lazy val root = (project in file(".")).
   aggregate(case_api, case_search, case_worker, case_etl)
   .settings(
       run := {
-          (run in case_api in Compile).evaluated
+          (run in case_search in Compile).evaluated
       }
   )
