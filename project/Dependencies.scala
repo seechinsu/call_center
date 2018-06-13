@@ -49,4 +49,15 @@ object Dependencies {
     )
   }
 
+  val etlDependencies: Seq[ModuleID] = commonDependencies ++ json ++ {
+    Seq(
+      "com.typesafe.play" %% "anorm" % "2.6.0-M1",
+      "com.facebook.presto" % "presto-jdbc" % "0.180",
+      "com.typesafe.scala-logging" %% "scala-logging" % "3.5.0",
+      "io.circe" %% "circe-yaml" % "0.6.1",
+      "com.dripower" %% "play-circe" % "2609.1",
+      "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.1" % Test,
+      "org.syslog4j" % "syslog4j" % "0.9.46" % Runtime
+    )
+  }
 }
