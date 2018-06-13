@@ -1,0 +1,80 @@
+spark:
+  ports:
+    - 4040:4040
+    - 8080:8080
+  links:
+    - kafka:kafka.local
+    - zookeeper:zookeeper.local
+    - mysqldb:mysqldb.local
+    - s3:s3.amazonaws.com
+    - s3:company.s3.amazonaws.com
+  environment:
+    - AWS_ACCESS_KEY_ID=local-identity
+    - AWS_SECRET_ACCESS_KEY=local-credential
+    - AWS_REGION=us-east-1
+    - AWS_S3_ENDPOINT=s3.amazonaws.com
+    - AWS_S3_BUCKET_UPLOADED_LOG_FILES=sample-logs
+    - AWS_ACCESS_KEY_ID=XXX
+    - AWS_SECRET_ACCESS_KEY=XXX
+  volumes:
+    - ./spark-job:/usr/spark-2.1.0/spark-job
+spark-test-env:
+  links:
+    - kafka:kafka.local
+    - zookeeper:zookeeper.local
+    - s3:s3.amazonaws.com
+    - s3:company.s3.amazonaws.com
+  environment:
+    - AWS_REGION=us-east-1
+    - AWS_S3_ENDPOINT=s3.amazonaws.com
+    - AUTO_START_JAR=sparks3logger_2.11-1.0.0.jar
+  volumes:
+    - ./spark-job:/usr/spark-2.1.0/spark-job
+zookeeper:
+  image: wurstmeister/zookeeper:3.4.6
+  ports:
+    - 2181:2181
+kafka:
+  image: docker-kafka-debug:aa53dc721484
+  ports:
+    - 9092:9092
+  links:
+    - zookeeper
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+  environment:
+    - KAFKA_INTER_BROKER_PROTOCOL_VERSION=0.9.0.1
+    - KAFKA_LOG_MESSAGE_FORMAT_VERSION=0.9.0.1
+    - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+kafkacat:
+  image: ryane/kafkacat
+  entrypoint:
+    - kafkacat
+    - -b kafka.local
+  links:
+    - kafka:kafka.local
+testscripts:
+  links:
+    - kafka:kafka.local
+  volumes:
+    - ./spark-job:/usr/src/app/spark-job
+spark-s3-logger:
+  volumes:
+    - ./spark-s3-logger:/opt/src
+    - ./spark-job:/opt/src/target/scala-2.11
+  environment:
+    - KAFKA_BROKERS=kafka.local:9092
+    - LOGLEVEL=INFO
+  links:
+    - kafka:kafka.local
+s3:
+  image: s3proxy:73fb9ef0dd38
+  ports:
+    - 4567:8080
+mysqldb:
+  image: mysql:5.7.16
+  ports:
+    - 3306:3306
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=rpp

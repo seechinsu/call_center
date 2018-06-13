@@ -1,0 +1,20 @@
+spark:
+  build: ./spark
+  restart: always
+  stdin_open: true
+  tty: true
+spark-test-env:
+  build: ./spark
+  restart: 'no'
+  stdin_open: true
+  tty: true
+testscripts:
+  build: ./testscripts
+  restart: always
+  stdin_open: true
+  tty: true
+spark-s3-logger:
+  build: ./spark-s3-logger
+  restart: always
+  stdin_open: true
+  tty: true
