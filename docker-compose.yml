@@ -114,37 +114,32 @@ services:
       links:
         - kafka:kafka.local
         - mongo:mongo.local
-    mongodata:
-      image: mongo:3.0.4
-      volumes:
-        - /data/db
-      command: --break-mongo
-    mongo:
-      image: mongo:3.0.4
-      volumes_from:
-        - mongodata
-      ports:
-        - "27017:27017"
-      command: --smallfiles --rest
-      environment:
-        - MONGODB_USER=mongo
-        - MONGODB_DATABASE=dbname
-        - MONGODB_PASS=dbpass
-    zookeeper:
-      image: wurstmeister/zookeeper:3.4.6
-    kafka:
-      image: ches/kafka:0.10.1.0
-      links:
-        - zookeeper
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-    kafkacat:
-      image: ryane/kafkacat
-      entrypoint:
-        - kafkacat
-        - -b kafka.local
-      links:
-        - kafka:kafka.local
+  mongo:
+    image: mongo
+    volumes:
+      - /data/db
+    ports:
+
+      - "27017:27017"
+    environment:
+      - MONGODB_USER=mongo
+      - MONGODB_DATABASE=dbname
+      - MONGODB_PASS=dbpass
+  zookeeper:
+    image: wurstmeister/zookeeper:3.4.6
+  kafka:
+    image: johnnypark/kafka-zookeeper
+    links:
+      - zookeeper
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafkacat:
+    image: ryane/kafkacat
+    entrypoint:
+      - kafkacat
+      - -b kafka.local
+    links:
+      - kafka:kafka.local
   case_etl:
     ports:
        - 9000:9000
