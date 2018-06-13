@@ -59,7 +59,18 @@ lazy val case_search = (project in file("case-search")).
       BuildInfoKey.action("commitHash")(sys.env.getOrElse("GIT_COMMIT","UNKNOWN"))),
     buildInfoPackage := "call.center"
   ).
-  enablePlugins(PlayScala)
+  settings(
+    Seq(
+      dockerRepository := Some("call.center"),
+      //dockerBaseImage := "openjdk:8-jdk-alpine",
+      packageName in Docker := name.value,
+      dockerUpdateLatest := true,
+      version in Docker := "latest",
+      defaultLinuxInstallLocation in Docker := s"/opt/${name.value}",
+      dockerEntrypoint := Seq("bin/%s" format executableScriptName.value, "-Dconfig.resource=docker.conf")
+    )
+  ).
+  enablePlugins(PlayScala, DockerPlugin)
 
 
 lazy val case_worker = (project in file("case-worker")).
@@ -77,7 +88,18 @@ lazy val case_worker = (project in file("case-worker")).
           BuildInfoKey.action("commitHash")(sys.env.getOrElse("GIT_COMMIT","UNKNOWN"))),
       buildInfoPackage := "call.center.worker"
   ).
-  enablePlugins(PlayScala, BuildInfoPlugin)
+  settings(
+    Seq(
+      dockerRepository := Some("call.center"),
+      //dockerBaseImage := "openjdk:8-jdk-alpine",
+      packageName in Docker := name.value,
+      dockerUpdateLatest := true,
+      version in Docker := "latest",
+      defaultLinuxInstallLocation in Docker := s"/opt/${name.value}",
+      dockerEntrypoint := Seq("bin/%s" format executableScriptName.value, "-Dconfig.resource=docker.conf")
+    )
+  ).
+  enablePlugins(PlayScala, BuildInfoPlugin,DockerPlugin)
 
 lazy val case_etl = (project in file("case-etl")).
   dependsOn(common, kafka).
