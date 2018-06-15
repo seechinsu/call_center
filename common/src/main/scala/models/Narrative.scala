@@ -5,7 +5,7 @@ import reactivemongo.bson.{BSONObjectID}
 import reactivemongo.play.json._
 
 
-case class Narrative(_id: Option[BSONObjectID], narrativeInfo: NarrativeInfo)
+case class Narrative(_id: Option[BSONObjectID] = Some(BSONObjectID.generate()), narrativeInfo: NarrativeInfo)
 
 object Narrative {
   import play.api.libs.json._

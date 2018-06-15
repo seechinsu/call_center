@@ -5,7 +5,7 @@ import reactivemongo.bson.{BSONObjectID}
 import reactivemongo.play.json._
 
 case class Person(
-                   _id: Option[BSONObjectID],
+                   _id: Option[BSONObjectID] = Some(BSONObjectID.generate()),
                    firstName: String,
                    middleName: String,
                    lastName: String,

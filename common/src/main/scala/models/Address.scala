@@ -4,7 +4,7 @@ import reactivemongo.bson.{BSONObjectID}
 import reactivemongo.play.json._
 
 
-case class Address(_id: Option[BSONObjectID], addressInfo: AddressInfo)
+case class Address(_id: Option[BSONObjectID] = Some(BSONObjectID.generate()), addressInfo: AddressInfo)
 
 object Address {
   import play.api.libs.json._

@@ -6,7 +6,7 @@ import reactivemongo.bson.{BSONObjectID}
 import reactivemongo.play.json._
 
 
-case class Lead(_id: Option[BSONObjectID],
+case class Lead(_id: Option[BSONObjectID] = Some(BSONObjectID.generate()),
                 inFile: Boolean,
                 leadType: String,
                 operator: String,

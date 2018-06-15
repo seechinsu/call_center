@@ -17,7 +17,7 @@ import java.time.LocalDate
 import scala.concurrent.{ExecutionContext, Future}
 
 
-case class Vehicle(_id: Option[BSONObjectID], vehicleInfo: VehicleInfo)
+case class Vehicle(_id: Option[BSONObjectID] = Some(BSONObjectID.generate()), vehicleInfo: VehicleInfo)
 
 object Vehicle {
   import play.api.libs.json._

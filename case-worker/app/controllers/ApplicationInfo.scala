@@ -42,7 +42,7 @@ class ApplicationInfo @Inject()(
 
   def health: Action[AnyContent] = Action.async {
     val anyId = BSONObjectID.generate()
-    val future = caseRepo.getCase(anyId)
+    val future = caseRepo.getT(anyId)
     val result = future.map(_ => Ok("OK")).recover{case exception: Exception => ServiceUnavailable(exception.toString)}
     result
   }

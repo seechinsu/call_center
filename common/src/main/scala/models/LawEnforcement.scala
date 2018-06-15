@@ -4,7 +4,7 @@ import java.time.{LocalDate}
 import reactivemongo.bson.{BSONObjectID}
 import reactivemongo.play.json._
 
-case class LawEnforcement(_id: Option[BSONObjectID], lawEnforcementInfo: LawEnforcementInfo)
+case class LawEnforcement(_id: Option[BSONObjectID] = Some(BSONObjectID.generate()), lawEnforcementInfo: LawEnforcementInfo)
 
 object LawEnforcement {
 

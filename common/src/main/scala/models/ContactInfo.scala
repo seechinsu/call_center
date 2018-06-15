@@ -4,7 +4,7 @@ import reactivemongo.bson.BSONObjectID
 import reactivemongo.play.json._
 
 
-case class ContactInfo(_id: Option[BSONObjectID], contactInfoDetail: ContactInfoDetail)
+case class ContactInfo(_id: Option[BSONObjectID] = Some(BSONObjectID.generate()), contactInfoDetail: ContactInfoDetail)
 
 object ContactInfo {
   import play.api.libs.json._

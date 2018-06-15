@@ -21,7 +21,7 @@ class CaseAddedConsumerModule extends ConsumerAbstractModule {
 
 class MongoSolrCaseAddedETLProcessor @Inject()(solrRepository: SolrCaseRepository) (implicit ec: ExecutionContext) extends ConsumerRecordProcessor {
   override def processAsync(record: InputEvent): Future[Unit] = {
-    serialize.deserialize[Case](record.value).map(solrRepository.addCase).getOrElse(Future.successful()).map(_ => ())
+    serialize.deserialize[Case](record.value).map(c => solrRepository.addT(c._id.getOrElse(BSONObjectID.generate()), c)).getOrElse(Future.successful()).map(_ => ())
   }
 }
 
@@ -36,7 +36,7 @@ class CaseUpdatedConsumerModule extends ConsumerAbstractModule {
 class MongoSolrCaseUpdatedETLProcessor @Inject()(solrRepository: SolrCaseRepository) (implicit ec: ExecutionContext) extends ConsumerRecordProcessor {
   override def processAsync(record: InputEvent): Future[Unit] = {
     serialize.deserialize[Case](record.value).map(
-      c => solrRepository.updateCase(
+      c => solrRepository.updateT(
         c._id.getOrElse(BSONObjectID.generate()),
         c
       )
@@ -62,10 +62,10 @@ class MongoSolrCaseIdUpdatedETLProcessor @Inject()(
     serialize.deserialize[CaseId](record.value).map {
       cId =>
         val bsonId = BSONObjectID.parse(cId.id).getOrElse(BSONObjectID.generate())
-        caseRepository.getCase(bsonId).map {
+        caseRepository.getT(bsonId).map {
           x =>
             x.foreach(
-              mongoCase => solrRepository.updateCase(
+              mongoCase => solrRepository.updateT(
                 bsonId,
                 mongoCase
               )
@@ -87,7 +87,7 @@ class CaseDeletedConsumerModule extends ConsumerAbstractModule {
 class MongoSolrCaseDeletedETLProcessor @Inject()(solrRepository: SolrCaseRepository) (implicit ec: ExecutionContext) extends ConsumerRecordProcessor {
   override def processAsync(record: InputEvent): Future[Unit] = {
     serialize.deserialize[Case](record.value).map(
-      c => solrRepository.deleteCase(
+      c => solrRepository.deleteT(
         c._id.getOrElse(BSONObjectID.generate())
       )
     ).getOrElse(Future.successful()).map(_ => ())
