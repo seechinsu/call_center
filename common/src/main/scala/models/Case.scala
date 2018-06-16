@@ -6,20 +6,12 @@ import reactivemongo.play.json._
 
 
 
-case class Case(_id: Option[BSONObjectID] = Some(BSONObjectID.generate()), primaryCaseInfo: PrimaryCaseInfo)
+case class Case(_id: BSONObjectID, primaryCaseInfo: PrimaryCaseInfo)
 
 object Case {
   import play.api.libs.json._
 
   implicit val formats: OFormat[Case] = Json.format[Case]
-
-  def apply(
-    _id: Option[BSONObjectID] = Some(BSONObjectID.generate()),
-    primaryCaseInfo: PrimaryCaseInfo
-  ): Case = _id match {
-    case Some(id) => new Case(_id, primaryCaseInfo)
-    case _ => new Case(Some(BSONObjectID.generate()), primaryCaseInfo)
-  }
 }
 
 case class PrimaryCaseInfo(
