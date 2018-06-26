@@ -38,7 +38,7 @@ lazy val case_api = (project in file("case-api")).
             dockerUpdateLatest := true,
             version in Docker := "latest",
             defaultLinuxInstallLocation in Docker := s"/opt/${name.value}",
-            dockerEntrypoint := Seq("bin/%s" format executableScriptName.value, "-Dconfig.resource=docker.conf")
+            dockerEntrypoint := Seq("bin/%s" format executableScriptName.value)
         )
     ).
   enablePlugins(PlayScala, DockerPlugin)
@@ -67,7 +67,7 @@ lazy val case_search = (project in file("case-search")).
       dockerUpdateLatest := true,
       version in Docker := "latest",
       defaultLinuxInstallLocation in Docker := s"/opt/${name.value}",
-      dockerEntrypoint := Seq("bin/%s" format executableScriptName.value, "-Dconfig.resource=docker.conf")
+      dockerEntrypoint := Seq("bin/%s" format executableScriptName.value)
     )
   ).
   enablePlugins(PlayScala, DockerPlugin)
@@ -96,7 +96,7 @@ lazy val case_worker = (project in file("case-worker")).
       dockerUpdateLatest := true,
       version in Docker := "latest",
       defaultLinuxInstallLocation in Docker := s"/opt/${name.value}",
-      dockerEntrypoint := Seq("bin/%s" format executableScriptName.value, "-Dconfig.resource=docker.conf")
+      dockerEntrypoint := Seq("bin/%s" format executableScriptName.value)
     )
   ).
   enablePlugins(PlayScala, BuildInfoPlugin,DockerPlugin)

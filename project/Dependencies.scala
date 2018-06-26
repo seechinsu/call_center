@@ -43,7 +43,7 @@ object Dependencies {
 
   val crudDependencies: Seq[ModuleID] = commonDependencies ++ json ++ {
     Seq(
-      "io.swagger"             %% "swagger-play2"       % "1.6.0",
+      "io.swagger"             %% "swagger-play2"       % "1.6.1-SNAPSHOT",
       "org.webjars"            %  "swagger-ui"          % "3.2.2",
       "org.scalatestplus.play" %% "scalatestplus-play"  % "3.1.1" % Test
     )
