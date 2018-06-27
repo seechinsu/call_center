@@ -13,6 +13,7 @@ import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, ControllerComponents}
 
 import java.time.Instant
+import java.util.UUID
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
@@ -56,12 +57,16 @@ class CaseController @Inject()(
   )
   def createCase() = Action.async(parse.json) { req =>
     req.body.validate[Case].map { caseData =>
-      //      for { _ <- caseRepo.addCase(caseData)
-      //            _ <- producer.publish(EventWrapper.apply("case-added", serialize.serialize(caseData)))
-      //      } yield Created
-      caseRepo.addT(caseData).map { _ =>
-        Created
-      }
+      for {
+        _ <- caseRepo.addT(caseData)
+           _ <- producer.publish(
+             EventWrapper.apply(
+               "case-added",
+               caseData._id.map(_.stringify).getOrElse(UUID.randomUUID().toString),
+               serialize.serialize(caseData)
+             )
+           )
+      } yield Created
     }.recover {
       case error => System.out.println(s"unable to parse ${error}")
         Future.successful(BadRequest("Invalid Case format"))
@@ -83,7 +88,7 @@ class CaseController @Inject()(
     value = "Find a case",
     response = classOf[Case]
   )
-  def getCase(@ApiParam(value = "The id of the case to retrieve") caseId: BSONObjectID) = Action.async{ req =>
+  def getCase(@ApiParam(value = "The id of the case to retrieve") caseId: BSONObjectID) = Action.async { req =>
     caseRepo.getT(caseId).map { maybeCase =>
       maybeCase.map { `case` =>
         Ok(Json.toJson(`case`))
